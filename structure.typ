@@ -19,9 +19,10 @@
 #include "chapters/1_introduction.typ"
 #include "chapters/2_stage-description.typ"
 #include "chapters/3_requirements.typ"
-#include "chapters/4_conclusion.typ"
-
-#include "docs/esempi.typ"
+#include "chapters/4_technologies.typ"
+#include "chapters/5_design.typ"
+#include "chapters/6_implementation.typ"
+#include "chapters/7_conclusion.typ"
 
 // Backmatter
 #include "appendix/glossary/glossary.typ"

@@ -7,8 +7,8 @@
 // This file sets up the properties of the document and the libraries used
 
 #let config(
-  myAuthor: "Nome cognome",
-  myTitle: "Titolo",
+  myAuthor: "Leonardo Preo",
+  myTitle: "Sviluppo di un chatbot basato su Model Context Protocol per il supporto alla pianificazione delle attività aziendali​",
   myLang: "it",
   myNumbering: "1.1",
   body,

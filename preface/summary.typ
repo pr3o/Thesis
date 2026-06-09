@@ -11,7 +11,7 @@
 #v(1em)
 Il presente documento descrive il lavoro svolto durante il periodo di stage curricolare, della durata di circa trecentoventi ore, dal laureando #text(myName) presso l'azienda #text(myCompany). Lo stage è stato condotto sotto la supervisione del tutor aziendale #myTutor, mentre il prof. #text(myProf) ha ricoperto il ruolo di tutor accademico.
 \ \
-Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, una piattaforma web il cui scopo è .... L'obiettivo è quello di ....
+Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, un modulo chatbot integrato all'interno del gestionale Agilis, volto a supportare il reparto _Delivery_ nella pianificazione delle attività operative. L'obiettivo è quello di fornire uno strumento di supporto decisionale basato su intelligenza artificiale, in grado di interagire in linguaggio naturale con gli operatori, suggerendo soluzioni di pianificazione intelligente e segnalando eventuali conflitti o vincoli non rispettati.
 
 #linebreak()
 #text(24pt, weight: "semibold")[Organizzazione del testo]
@@ -20,6 +20,11 @@ Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, una piatta
 
 / #link(<cap:introduzione>)[Il primo capitolo]: introduce l'azienda, il progetto e le motivazioni che mi hanno portato a sceglierlo;
 / #link(<cap:descrizione-stage>)[Il secondo capitolo]: descrive l'azienda, il progetto e l'organizzazione del lavoro, definendo gli obiettivi e analizzando i rischi;
+/ #link(<cap:analisi-requisiti>)[Il terzo capitolo]: analizza gli utenti, sviluppa le user stories e compone la lista dei requisiti dividendo per tipologia e necessità;
+/ #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie utilizzate, le descrive e spiega le ragioni che mi hanno portato a sceglierle;
+/ #link(<cap:progettazione>)[Il quinto capitolo]: descrive l'architettura del sistema, i componenti principali e le interazioni tra di essi;
+/ #link(<cap:implementazione>)[Il sesto capitolo]: descrive l'implementazione del sistema, illustrando le scelte tecniche adottate e le sfide affrontate;
+/ #link(<cap:conclusioni>)[Il settimo capitolo]: riassume i risultati ottenuti, livello di raggiungimento degli obiettivi, conoscenze acquisite e propone possibili sviluppi futuri del progetto.
 
 #linebreak()
 #text(24pt, weight: "semibold", "Convenzioni tipografiche")
@@ -36,19 +41,26 @@ Durante la stesura del testo ho scelto di adottare le seguenti convenzioni tipog
 - I blocchi di codice sono rappresentati nel seguente modo
 #linebreak()
 #figure(caption: "Codice d'esempio.")[
-```c
-float Q_rsqrt( float number ){
-	long i;
-	float x2, y;
-	const float threehalfs = 1.5F;
-	x2 = number * 0.5F;
-	y  = number;
-	i  = * (long * ) &y;
-	i  = 0x5f3759df - (i>>1);
-	y  = * (float * ) &i;
-	y  = y * ( threehalfs - ( x2 * y * y ) );
-//y  = y * ( threehalfs - ( x2 * y * y ) );
-	return y;
+```cs
+using System;
+
+namespace EsempioTesi
+{
+    class Program
+    {
+        // Metodo principale di esecuzione
+        static void Main(string[] args)
+        {
+            int risultato = CalcolaSomma(5, 7);
+            Console.WriteLine($"Il risultato è: {risultato}");
+        }
+
+        /// <summary> Calcola la somma di due numeri interi.</summary>
+        static int CalcolaSomma(int a, int b)
+        {
+            return a + b;
+        }
+    }
 }
 ```
 ]

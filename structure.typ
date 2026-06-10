@@ -17,7 +17,7 @@
 #counter(page).update(1)
 #set page(numbering: "1.")
 #include "chapters/1_introduction.typ"
-#include "chapters/2_stage-description.typ"
+#include "chapters/2_stato-arte.typ"
 #include "chapters/3_requirements.typ"
 #include "chapters/4_technologies.typ"
 #include "chapters/5_design.typ"

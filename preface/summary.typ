@@ -19,7 +19,7 @@ Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, un modulo 
 #v(1em)
 
 / #link(<cap:introduzione>)[Il primo capitolo]: introduce l'azienda, il progetto e le motivazioni che mi hanno portato a sceglierlo;
-/ #link(<cap:descrizione-stage>)[Il secondo capitolo]: descrive l'azienda, il progetto e l'organizzazione del lavoro, definendo gli obiettivi e analizzando i rischi;
+/ #link(<cap:stato-arte-tecnologie>)[Il secondo capitolo]: descrive l'azienda, il progetto e l'organizzazione del lavoro, definendo gli obiettivi e analizzando i rischi;
 / #link(<cap:analisi-requisiti>)[Il terzo capitolo]: analizza gli utenti, sviluppa le user stories e compone la lista dei requisiti dividendo per tipologia e necessità;
 / #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie utilizzate, le descrive e spiega le ragioni che mi hanno portato a sceglierle;
 / #link(<cap:progettazione>)[Il quinto capitolo]: descrive l'architettura del sistema, i componenti principali e le interazioni tra di essi;

@@ -18,13 +18,13 @@ Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, un modulo 
 #linebreak()
 #v(1em)
 
-/ #link(<cap:introduzione>)[Il primo capitolo]: introduce l'azienda, il progetto e le motivazioni che mi hanno portato a sceglierlo;
-/ #link(<cap:stato-arte-tecnologie>)[Il secondo capitolo]: descrive l'azienda, il progetto e l'organizzazione del lavoro, definendo gli obiettivi e analizzando i rischi;
-/ #link(<cap:analisi-requisiti>)[Il terzo capitolo]: analizza gli utenti, sviluppa le user stories e compone la lista dei requisiti dividendo per tipologia e necessità;
-/ #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie utilizzate, le descrive e spiega le ragioni che mi hanno portato a sceglierle;
-/ #link(<cap:progettazione>)[Il quinto capitolo]: descrive l'architettura del sistema, i componenti principali e le interazioni tra di essi;
-/ #link(<cap:implementazione>)[Il sesto capitolo]: descrive l'implementazione del sistema, illustrando le scelte tecniche adottate e le sfide affrontate;
-/ #link(<cap:conclusioni>)[Il settimo capitolo]: riassume i risultati ottenuti, livello di raggiungimento degli obiettivi, conoscenze acquisite e propone possibili sviluppi futuri del progetto.
+/ #link(<cap:introduzione>)[Il primo capitolo]: presenta l'azienda, introduce il progetto e illustra le motivazioni che mi hanno portato a sceglierlo, definendone gli obiettivi e il contributo originale;
+/ #link(<cap:stato-arte>)[Il secondo capitolo]: ripercorre lo stato dell'arte su cui poggia il lavoro: l'evoluzione dei _Large Language Models_, il paradigma del _tool use_ e della _function calling_, il _Model Context Protocol_ e i framework di orchestrazione;
+/ #link(<cap:analisi>)[Il terzo capitolo]: analizza gli utenti e i casi d'uso del sistema e ne deriva i requisiti, distinti in funzionali, non funzionali e vincoli, rimandando all'#link(<cap:A-appendice>)[Appendice A] per la specifica completa;
+/ #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie adottate, motivando le ragioni che ne hanno guidato la scelta;
+/ #link(<cap:progettazione>)[Il quinto capitolo]: descrive la progettazione del sistema: l'architettura di distribuzione, i componenti principali e le loro interazioni, il modello di interazione uomo-AI e le principali decisioni architetturali;
+/ #link(<cap:implementazione>)[Il sesto capitolo]: descrive l'implementazione, illustrando le scelte tecniche più significative e le sfide affrontate;
+/ #link(<cap:conclusioni>)[Il settimo capitolo]: trae le conclusioni: il consuntivo tra piano di lavoro e lavoro effettivo, il grado di raggiungimento degli obiettivi, i rischi occorsi e i possibili sviluppi futuri.
 
 #linebreak()
 #text(24pt, weight: "semibold", "Convenzioni tipografiche")

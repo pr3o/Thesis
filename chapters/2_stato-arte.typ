@@ -1,36 +1,37 @@
-#import "../config/thesis-config.typ": glpl, gl,
+#import "../config/thesis-config.typ": glpl, gl, linkfn
 #import "../config/variables.typ": myTutor
 #pagebreak(to:"odd")
 
-= Stato dell'Arte e Tecnologie<cap:stato-arte-tecnologie>
+= Stato dell'Arte<cap:stato-arte>
 #text(style: "italic", [
-    In questo capitolo approfondisco l'organizzazione dello stage, il rapporto con l'azienda e svolgo l'analisi dei rischi.
+    In questo capitolo ripercorro lo stato dell'arte su cui si fonda il progetto: l'evoluzione dei Large Language Models, il paradigma del tool use e della function calling, il Model Context Protocol e i principali framework di orchestrazione per applicazioni basate su intelligenza artificiale.
 ])
 #v(1em)
 
-== L'evoluzione dei _Large Language Models_
-Gli _LLMs_ hanno subito negli ultimi anni un'evoluzione radicale, ridefinendo i confini dell'ingegneria del software e dell'intelligenza artificiale applicata. Basati prevalentemente sull'architettura _Transformer_ introdotta da Vaswani _et al._ nel 2017, questi modelli vengono pre-addestrati su enormi volumi di testo non strutturato per apprendere le relazioni statistiche e semantiche tra i token. \
-Inizialmente concepiti come predittori statistici di testo e generatori di prosa, i modelli più recenti hanno dimostrato capacità emergenti avanzate. Tra queste spiccano il ragionamento logico-deduttivo, la comprensione del contesto e la generazione di codice sorgente sintatticamente corretto. Tuttavia, l'architettura pura di un LLM presenta un limite intrinseco noto come _isolamento informativo_: il modello risponde basandosi esclusivamente sulla conoscenza cristallizzata al momento del suo _knowledge cutoff_, risultando cieco rispetto ai dati dinamici, in tempo reale o privati. Inoltre, i modelli puri soffrono del fenomeno delle "allucinazioni", ovvero la generazione di risposte palusibili ma fattualmente errate o prive di fondamento reale.
+== L'evoluzione dei Large Language Models
+Gli LLM hanno conosciuto negli ultimi anni un'evoluzione radicale, ridefinendo i confini dell'ingegneria del software e dell'intelligenza artificiale applicata. Basati prevalentemente sull'architettura #linkfn("https://arxiv.org/abs/1706.03762")[Transformer] introdotta da Vaswani et al. nel 2017, questi modelli vengono pre-addestrati su enormi volumi di testo non strutturato per apprendere le relazioni statistiche e semantiche tra i _token_. \
+Inizialmente concepiti come predittori statistici di testo, i modelli più recenti hanno mostrato capacità emergenti avanzate, tra cui il ragionamento logico-deduttivo, la comprensione del contesto e la generazione di codice sorgente sintatticamente corretto. L'architettura pura di un LLM presenta un limite intrinseco, l'_isolamento informativo_: il modello risponde basandosi esclusivamente sulla conoscenza cristallizzata al momento del suo _knowledge cutoff_, risultando cieco rispetto ai dati dinamici, in tempo reale o privati. A ciò si aggiunge il fenomeno delle _allucinazioni_, ovvero la generazione di risposte plausibili ma fattualmente errate.
 
-== Il paradigma del _Tool Use_ e della _Function Calling_
-Per superare i limiti dell'isolamento informativo e ridurre l'incidenza delle allucinazioni, la ricerca si è orientata verso sistemi aumentati, evolvendo il ruolo dell'LLM da mero generatore di testo ad "agente" in grado di interagire con l'ambiente esterno. Questo cambiamento di paradigma è noto come #gl("tool-use") o _Function Calling_.\
-Sotto questo modello, l'LLM non viene più interrogato per fornire direttamente la risposta finale a un problema complesso che richiede dati esterni. Al contrario, viene addestrato a riconoscere quando una richiesta dell'utente necessita di informazioni integrative o di un'azione applicativa. Invece di rispondere in linguaggio naturale, il modello interrompe la generazione e produce un output strutturato (tipicamente in formato JSON) che specifica il nome di una funzione esterna e i relativi parametri di invocazione.\
-L'applicazione ospite (il client) intercetta questo output, esegue la funzione chiamando le #gl("api") o effettuando le query necessarie, e restituisce il risultato testuale al modello. L'LLM, infine, rielaboraquesto nuovo contesto per formulare la risposta finale. Questo meccanismo sposta il carico computazionale dell'elaborazione del dato dall'intelligenza artificiale al software deterministico, garantendo la precisione del risultato.
+== Il paradigma del Tool Use e della Function Calling
+Per superare l'isolamento informativo e ridurre l'incidenza delle allucinazioni, la ricerca si è orientata verso sistemi aumentati, facendo evolvere il ruolo dell'LLM da generatore di testo ad _agente_ in grado di interagire con l'ambiente esterno. Questo cambiamento di paradigma è noto come #gl("tool-use") o _function calling_.\
+In questo modello l'LLM non viene più interrogato per fornire direttamente la risposta a un problema che richiede dati esterni; viene invece istruito a riconoscere quando una richiesta necessita di informazioni integrative o di un'azione applicativa. In tal caso il modello interrompe la generazione e produce un output strutturato - tipicamente in formato JSON - che specifica il nome di una funzione e i relativi parametri di invocazione. L'applicazione ospite intercetta questo output, esegue la funzione chiamando le #gl("api") o effettuando le query necessarie e restituisce il risultato al modello, che lo rielabora per formulare la risposta finale. Il meccanismo sposta il carico dell'elaborazione del dato dall'intelligenza artificiale al software deterministico, garantendo la precisione del risultato.
 
 == Il Model Context Protocol
+Sebbene la _function calling_ sia ampiamente supportata dai principali provider di modelli, la sua implementazione ha storicamente sofferto di una forte frammentazione: ogni piattaforma e ogni framework ha imposto schemi di definizione dei tool, formati di serializzazione e modelli di trasporto proprietari. Di conseguenza, integrare la stessa suite di strumenti con modelli differenti ha spesso richiesto la riscrittura di complessi _layer_ di adattamento.\
+Per risolvere il problema di interoperabilità è stato introdotto il #linkfn("https://modelcontextprotocol.io/docs/getting-started/intro")[Model Context Protocol], un protocollo aperto e standardizzato - sviluppato da Anthropic#footnote[Società statunitense di ricerca e sviluppo nell’intelligenza artificiale.] - che formalizza la comunicazione tra le applicazioni guidate dall'AI e le sorgenti di dati o strumenti esterni. Per analogia, MCP è un'applicazione basata su intelligenza artificiale ciò che lo standard USB-C è all'hardware: un livello di connessione universale.\
+
+L'architettura si basa su una chiara separazione dei ruoli secondo un pattern _host-client-server_. Un *server MCP* è un processo indipendente che espone in modo standardizzato tre tipi di risorse primitive: i _prompt_ (modelli di istruzioni preconfigurati), le _resource_ (dati testuali o binari in sola lettura) e i _tool_ (funzioni eseguibili che interrogano o modificano sistemi esterni, descritte tramite JSON Schema). Un *host* - come un #gl("ide") o un assistente conversazionale - istanzia, per ciascun server a cui si collega, un *client MCP* che ne media la comunicazione: il client interroga il server per scoprirne le capacità, ne inoltra gli schemi al modello e, quando questo richiede l'invocazione di uno strumento, instrada la chiamata al server e ne restituisce la risposta.\
+
 #figure(
-    caption: [Logo di MCP.],
-    image("../images/mcp-logo.png", alt: "Logo MCP", width: 30%)
-)
+    caption: [Rappresentazione architetturale di alto livello del Model Context Protocol (MCP).],
+    image("../images/mcp-simple-diagram.png", width: 120%)
+)<fig:mcp-diagram>
 
-Sebbene il paradigma della _Function Calling_ sia ampiamente supportato dai principali provider di modelli, la sua implementazione ha storicamente sofferto di una forte frammentazione. Ogni piattaforma _AI_ e ogni framework di sviluppo ha storicamente imposto schemi di definizione dei tool, formati di serializzazione e modelli di trasporto proprietari. Di conseguenza, integrare la stessa suite di strumenti aziendali con modelli differenti ha spesso richiesto la riscrittura di complessi layer di adattamento (_adapter_).\
-Per risolvere questa problematica di interoperabilità, è stato introdotto il _Model Context Protocol_. Si tratta di un protocollo aperto e standardizzato che formalizza l'architettura di comunicazione tra le applicazioni client guidate dall'AI e le sorgenti di dati o strumenti esterni (i server MCP).\
+A livello di trasporto il protocollo utilizza canali standard - i flussi di input/output standard (_stdio_) per processi locali o connessioni persistenti (come i _Server Sent Events_ su HTTP) per le architetture distribuite - serializzando i messaggi secondo lo standard JSON-RPC 2.0.
 
-L'architettura di MCP si basa su una chiara separazione dei ruoli tramite un pattern _Client-Server_:
-- *MCP Server:* è un processo indipendente che espone in modo standardizzato tre tipi di risorse primitive:
-    1. _Prompts:_ Modelli di istruzioni preconfigurati.
-    2. _Resources:_ Dati testuali o binari in sola lettura (es. file log, documentazione)
-    3. _Tools:_ Funzioni eseguibili ed eseguite dal server che possono modificare lo stato o interrogare sistemi esterni, descritte tramite schemi _JSON Schema_.
-- *MCP Client:* è l'applicazione che mantiene la sessione con l'LLM. Il client interroga il server per scoprirne le capacità, inoltra gli schemi dei tool al modello e, quando il modello richiede l'invocazione di uno strumento, instrada la richiesta al server appropriato, restituendone la risposta all'LLM.
+== Framework di orchestrazione e vincoli aziendali
+La traduzione pratica del paradigma ad agenti in contesti _enterprise_ richiede framework di orchestrazione robusti, capaci di gestire i cicli di esecuzione, i contesti di memoria e i filtri software. Nel panorama Microsoft i due principali riferimenti sono LangChain e Microsoft Semantic Kernel.\
 
-Il protocollo a livello di trasporto utilizza canali standard come flussi di input/output standard (`stdio`) per processi locali o connessioni persistenti (come i _Server Sent Events_ su HTTP) per l'architettura distribuita, sfruttando la serializzazione dei messaggi basata sullo standard _JSON-RPC 2.0._.
+Semantic Kernel è un SDK _open source_ sviluppato da Microsoft per facilitare l'integrazione di modelli AI in applicazioni .NET. Rispetto ad altre librerie si distingue per una forte astrazione concettuale e per un'integrazione nativa con i meccanismi di _dependency injection_ e di programmazione asincrona tipici del C\#. Il framework astrae i canali di comunicazione con i differenti provider AI, offrendo un'interfaccia unificata per la gestione dello _streaming_ dei token e per l'esecuzione dei plugin; si presta quindi come strato ideale per implementare i filtri di controllo e di sicurezza che intercettano le risposte dell'LLM prima della loro visualizzazione.\
+
+Lo sviluppo di soluzioni basate su queste tecnologie deve però fare i conti con le infrastrutture aziendali preesistenti. Molti ERP di classe _enterprise_ poggiano su versioni classiche del framework .NET - come .NET Framework 4.8 - che presentano rigidi vincoli di compatibilità verso le librerie moderne pensate per .NET Core o .NET 8/10. Questa asimmetria tecnologica impone scelte architetturali mirate, separando nettamente l'interfaccia utente _legacy_ dai moderni motori di orchestrazione AI mediante strategie di disaccoppiamento basate su processi locali isolati o servizi web dedicati.

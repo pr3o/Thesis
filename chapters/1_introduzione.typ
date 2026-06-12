@@ -4,7 +4,7 @@
 
 = Introduzione <cap:introduzione>
 #text(style: "italic", [
-    In questo capitolo descrivo l'azienda, introduco il progetto, e spiego le motivazioni che mi hanno portato a sceglierlo.
+    In questo capitolo presento l'azienda presso cui ho svolto il tirocinio, introduco il progetto e illustro le motivazioni che mi hanno portato a sceglierlo, definendone gli obiettivi e il contributo originale.
 ])
 #v(1em)
 

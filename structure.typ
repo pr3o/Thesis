@@ -16,13 +16,18 @@
 // Mainmatter
 #counter(page).update(1)
 #set page(numbering: "1.")
-#include "chapters/1_introduction.typ"
+#include "chapters/1_introduzione.typ"
 #include "chapters/2_stato-arte.typ"
-#include "chapters/3_requirements.typ"
+#include "chapters/3_analisi.typ"
 #include "chapters/4_technologies.typ"
 #include "chapters/5_design.typ"
 #include "chapters/6_implementation.typ"
 #include "chapters/7_conclusion.typ"
+
+#counter(heading).update(0)
+#set heading(numbering: "A.1")
+#include "chapters/A_appendice.typ"
+#include "chapters/B_appendice.typ"
 
 // Backmatter
 #include "appendix/glossary/glossary.typ"

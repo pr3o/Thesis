@@ -1,30 +1,14 @@
 #import "../config/thesis-config.typ": glpl, gl
 #import "data/requirements_list.typ": *
+#import "data/patterns_decisions.typ": *
 
 #pagebreak(to:"odd")
-
-= Analisi dei requisiti<cap:analisi-requisiti>
+= Requisiti completi e decisioni di progetto<cap:A-appendice>
 
 #text(style: "italic", [
-    In questo capitolo effettuo l'analisi degli utenti, sviluppo le user stories e compongo la lista dei requisiti dividendoli per tipologia e necessità.
+    Questa appendice raccoglie il materiale di dettaglio richiamato dai capitoli 3 e 5 e tenuto fuori dal corpo per non appesantirlo, come indicato dal relatore.
 ])
 #v(1em)
-
-
-== Analisi degli utenti
-Il prodotto è concepito per essere utilizzato dagli operatori del reparto _Delivery_ di un'azienda cliente del Gruppo Omega che adotta il gestionale _Agilis_. Tale reparto è costituito da personale incaricato di gestire le consegne ai clienti, organizzare i turni di lavoro e coordinare le attività con le restanti divisioni aziendali.\
-Al fine di agevolare la gestione e la pianificazione di queste operazioni, il presente progetto si propone di sviluppare un chatbot interattivo in grado di rispondere ai quesiti degli utenti, fornire informazioni utili in tempo reale e proporre soluzioni di pianificazione intelligente basate su molteplici criteri configurabili.\
-L'obiettivo primario è fornire una soluzione applicativa concreta volta a incrementare l'efficienza e la produttività del reparto. L'automazione e il supporto decisionale consentiranno infatti agli operatori di ottimizzare i tempi di lavoro, recuperando risorse da destinare ad attività collaterali frequentemente relegate in secondo piano.\
-Infine, poiché il chatbot sarà integrato all'interno del modulo di pianificazione del gestionale _Agilis_ — un'area ad accesso ristretto ed esclusivo per gli operatori del reparto _Delivery_ —, questi ultimi rappresenteranno l'unica tipologia di utenza del sistema, garantendo che ogni interazione avvenga sempre a valle dell'autenticazione.
-
-== User stories<cap:user-stories>
-Nel contesto dello sviluppo agile, le _user stories_ rappresentano uno strumento di specifica dei requisiti funzionali orientato all'utente finale. A differenza dei casi d'uso tradizionali, che descrivono le interazioni tra attori e sistema in modo formale e strutturato, le user stories adottano un linguaggio naturale ed accessibile, rendendo i requisiti comprensibili anche a figure non tecniche come i committenti, i responsabili di prodotto e gli stessi utenti finali.\
-Una user story segue tipicamente il formato:
-#v(0.5em)
-_Come_ [tipo di utente]_, voglio_ [obiettivo]_, in modo da _[beneficio atteso].
-#v(0.5em)
-Questo schema sintetico mette al centro il valore percepito dall'utente, piuttosto che i dettagli implementativi del sistema. Ogni user story è inoltre corredata da _acceptance criteria_: una lista di condizioni verificabili che definiscono quando la storia si considera soddisfatta, fungendo da contratto tra sviluppatori e stakeholder.\
-Le user stories sono solitamente organizzate in _epic_: aggregazioni tematiche di storie correlate che condividono un obiettivo di alto livello. Ogni epic raggruppa funzionalità affini, facilitando la pianificazione degli sprint e la comunicazione del perimetro funzionale del prodotto. 
 
 == Lista delle user stories<cap:lista-user-stories>
 #[
@@ -245,24 +229,26 @@ In @tab:requisiti-funzionali, @tab:requisiti-qualitativi e @tab:requisiti-vincol
 )
 <tab:requisiti-vincolo>
 
-#v(2em)
-Di seguito, nella @tab:riepilogo-requisiti ho inserito il riepilogo dei requisiti, suddivisi per tipologia e necessità.
-#v(1em)
-#show figure: set block(breakable: false)
+
+== Catalogo dei pattern architetturali
 #figure(
   table(
-    columns: (auto, 1fr, 1fr, auto, auto),
-    table.header([*Tipo*], [*Mandatory*], [*Desirable*],[*Optional*], [*Somma*]),
-    [Functional], [#getFR(getLen: true).at(0)], [#getFR(getLen: true).at(1)], [#getFR(getLen: true).at(2)], [#getFR(getLen: true).sum()],
-    [Qualitative], [#getQR(getLen: true).at(0)], [#getQR(getLen: true).at(1)], [#getQR(getLen: true).at(2)], [#getQR(getLen: true).sum()],
-    [Constraint], [#getCR(getLen: true).at(0)], [#getCR(getLen: true).at(1)], [#getCR(getLen: true).at(2)], [#getCR(getLen: true).sum()],
-    [*Totale*],
-      [*#{getFR(getLen: true).at(0)+getQR(getLen: true).at(0)+getCR(getLen: true).at(0)}*],
-      [*#{getFR(getLen: true).at(1)+getQR(getLen: true).at(1)+getCR(getLen: true).at(1)}*],
-      [*#{getFR(getLen: true).at(2)+getQR(getLen: true).at(2)+getCR(getLen: true).at(2)}*],
-      [*#{getFR(getLen: true).sum()+getQR(getLen: true).sum()+getCR(getLen: true).sum()}*],
-    align: (center+horizon)
+    columns: (1fr, 2fr, 2fr),
+    align: (center + horizon, left + horizon, left + horizon),
+    table.header([*Pattern*], [*Dove*], [*Problema risolto*]),
+    ..getPatterns().flatten()
   ),
-  caption: "Riepilogo dei requisiti."
-)<tab:riepilogo-requisiti>
+  caption: [Catalogo dei pattern architetturali.],
+)<tab:pattern>
+
+== Decisioni architetturali e trade-off
+#figure(
+  table(
+    columns: (1fr, 1.5fr, 2fr),
+    align: (left + horizon, left + horizon, left + horizon),
+    table.header([*Decisione*], [*Motivazione*], [*Alternativa scartata*]),
+    ..getDecisions().flatten()
+  ),
+  caption: [Decisioni architetturali e relativi compromessi.],
+)<tab:decisioni>
 ]

@@ -4,7 +4,7 @@
 
 = Conclusioni<cap:conclusioni>
 #text(style: "italic", [
-    In questo capitolo traggo le conclusioni sul progetto.
+    In questo capitolo traggo le conclusioni del lavoro: confronto il piano di lavoro con quanto effettivamente svolto, verifico il grado di raggiungimento degli obiettivi e di copertura dei requisiti, ripercorro i rischi occorsi con le relative mitigazioni e propongo possibili sviluppi futuri.
 ])
 #v(1em)
 == Consuntivo finale

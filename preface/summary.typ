@@ -18,7 +18,7 @@ Questa tesi tratta la progettazione e lo sviluppo di *Nome progetto*, un modulo 
 #linebreak()
 #v(1em)
 
-/ #link(<cap:introduzione>)[Il primo capitolo]: presenta l'azienda, introduce il progetto e illustra le motivazioni che mi hanno portato a sceglierlo, definendone gli obiettivi e il contributo originale;
+/ #link(<cap:introduzione>)[Il primo capitolo]: presenta l'azienda, introduce il progetto e illustra le motivazioni che mi hanno portato a sceglierlo, definendone gli obiettivi e le peculiarità;
 / #link(<cap:stato-arte>)[Il secondo capitolo]: ripercorre lo stato dell'arte su cui poggia il lavoro: l'evoluzione dei _Large Language Models_, il paradigma del _tool use_ e della _function calling_, il _Model Context Protocol_ e i framework di orchestrazione;
 / #link(<cap:analisi>)[Il terzo capitolo]: analizza gli utenti e i casi d'uso del sistema e ne deriva i requisiti, distinti in funzionali, non funzionali e vincoli, rimandando all'#link(<cap:A-appendice>)[Appendice A] per la specifica completa;
 / #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie adottate, motivando le ragioni che ne hanno guidato la scelta;

@@ -70,5 +70,29 @@
     short: [IDE],
     long: [Integrated Development Environment],
     description: [Ambiente di sviluppo integrato che fornisce agli sviluppatori un insieme completo di strumenti per scrivere, testare e debugare il codice, spesso includendo un editor di testo, un compilatore, un debugger e funzionalità di gestione del progetto.]
+  ),
+  (
+    key: "knowledge-cutoff",
+    short: [Knowledge Cutoff],
+    long: [],
+    description: [Indica la data esatta in cui si interrompe la raccolta dei dati utilizzati per l'addestramento di un modello di intelligenza artificiale (come un LLM). Il modello non possiede alcuna conoscenza intrinseca di eventi, scoperte o informazioni emerse successivamente a tale data.]
+  ),
+  (
+  key: "sistemi-aumentati",
+  short: [Sistemi Aumentati],
+  long: [],
+  description: [Architetture di intelligenza artificiale in cui un modello linguistico non opera in isolamento, ma viene potenziato integrandolo con l'accesso a basi di dati, strumenti (tool) o interfacce di programmazione (API) esterne. Questo approccio permette all'LLM di superare i limiti della propria memoria interna e di recuperare informazioni aggiornate o private.]
+  ),
+  (
+  key: "agente",
+  short: [Agente],
+  long: [],
+  description: [Un sistema basato su intelligenza artificiale capace di analizzare una richiesta, ragionare per pianificare una sequenza di operazioni e interagire attivamente con l'ambiente esterno tramite l'uso di strumenti. A differenza di un modello standard che si limita a generare testo, un agente prende decisioni e compie azioni (come chiamate API) per raggiungere l'obiettivo prefissato.]
+  ),
+  (
+    key: "sdk",
+    short: [SDK],
+    long: [Software Development Kit],
+    description: [Pacchetto di strumenti di sviluppo che fornisce a programmatori e sviluppatori librerie, interfacce (API), documentazione e strumenti di debug necessari per creare applicazioni su una specifica piattaforma, semplificando e accelerando il processo di scrittura del codice.]
   )
 )

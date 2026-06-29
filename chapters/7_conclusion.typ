@@ -59,4 +59,8 @@ I rischi emersi durante lo stage sono riportati in @fig:rischi-occorsi.\
   )
 )<fig:rischi-occorsi>
 #v(1em)
+
+== Sviluppi futuri e messa in produzione
+Il lavoro svolto ha dimostrato l'efficacia di un'architettura ad agenti integrata nel gestionale Agilis.
+Grazie all'ottimizzazione estrema dei _tool_ e del contesto, il sistema riesce a operare con un modello quantizzato a 9 miliardi di parametri mantenendo un tasso di allucinazioni estremamente contenuto. Tuttavia, permane un margine fisiologico di errore intrinseco alla taglia del modello. Il principale sviluppo futuro in vista di un rilascio in produzione consiste nell'adeguamento dell'infrastruttura hardware (Nodo B), al fine di ospitare definitivamente il modello Qwen 3.6 a 27 miliardi di parametri, che nelle prove svolte ha offerto l'aderenza ai dati più solida e costante rispetto alla variante 9B (cfr. `QMR1`).
 == Valutazione personale

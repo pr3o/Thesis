@@ -41,9 +41,13 @@
 
   D.push(([_Refresh_ del token a più livelli], [Robustezza alla scadenza del JWT senza interrompere la conversazione.], [Singolo controllo all'avvio: il token scadrebbe a metà sessione.]))
 
-  D.push(([Costruzione _lazy_ dell'orchestratore], [Apertura del pannello immediata e UI sempre reattiva.], [Costruzione sincrona: _deadlock_ e blocco dell'interfaccia.]))
+  D.push(([Costruzione _lazy_ dell' orchestratore], [Apertura del pannello immediata e UI sempre reattiva.], [Costruzione sincrona: _deadlock_ e blocco dell'interfaccia.]))
 
   D.push(([Contesto limitato alla _viewport_], [Evita di far ragionare il modello su record fuori vista.], [Invio dell'intero dataset: costo di token e rumore informativo.]))
+
+  D.push(([Validazione delle proposte esterna al modello], [Un _tool_ deterministico verifica le sovrapposizioni e scarta a monte le proposte invalide; il modello resta libero dalla verifica di consistenza.], [Estrazione da un blocco JSON libero generato dal modello: fragile col modello leggero, frequenti incoerenze.]))
+
+  D.push(([_Tool_ deterministici ad alta granularità], [Incapsulano sequenze complesse (es. calcolo disponibilità) e restituiscono risultati finiti, riducendo i passi di ragionamento.], [_Tool_ elementari composti dal modello: ogni composizione è un passo in più e un'occasione di allucinazione.]))
 
   return D
 }

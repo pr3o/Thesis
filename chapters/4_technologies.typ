@@ -17,9 +17,9 @@
 - *.NET Framework*: storico e disponibile solo su Windows, la cui versione finale è la 4.8;
 - *.NET moderno*: multipiattaforma e _open-source_, giunto alla versione 10.
 
-Questa distinzione è centrale per il progetto, poiche le due famiglie non sono interoperabili all'interno dello stesso processo.
-Il gestionale Agilis è realizzato in Visual Basic .NET su .NET Framework 4.8; i nuovi componenti di intelligenza artificiale (server e client MCP) sono invece sviluppati in C\# su .NET 10, condizione necessaria per poter adottare le librerie più recenti dell'ecosistema - come l'SDK di MCP - non disponibili sul Framework _legacy_.
-L'impossibilità di caricare assembly .NET 10 all'interno di un processo .NET Framework 4.8 ha reso la separazione in processi distinti non una semplice scelta di disaccoppiamento, ma una necessità tecnica (cfr. 5.2).
+Questa distinzione è centrale per il progetto, poiché le due famiglie non sono interoperabili all'interno dello stesso processo.
+Il gestionale Agilis è realizzato in Visual Basic .NET su .NET Framework 4.8; i nuovi componenti di intelligenza artificiale (server e client MCP) sono invece sviluppati in C\# su .NET 10, condizione necessaria per poter adottare le librerie più recenti dell'ecosistema --- come l'SDK di MCP --- non disponibili sul Framework _legacy_.
+L'impossibilità di caricare assembly .NET 10 all'interno di un processo .NET Framework 4.8 ha reso la separazione in processi distinti non una semplice scelta di disaccoppiamento, ma una necessità tecnica (cfr. @sez:isolamento).
 
 == C\#
 #figure(
@@ -29,10 +29,10 @@ L'impossibilità di caricare assembly .NET 10 all'interno di un processo .NET Fr
 C\# è un linguaggio orientato agli oggetti, fortemente tipizzato e multi-paradigma, sviluppato da Microsoft. Grazie alla sua sintassi chiara, al controllo dei tipi a tempo di compilazione e alla gestione automatica della memoria, rappresenta uno standard industriale per le applicazioni _enterprise_. Nel progetto è stato il linguaggio principale per la logica di _back-end_, rivelandosi ideale per la realizzazione del server MCP e per l'orchestrazione conversazionale.
 
 == Visual Basic .NET
-Visual Basic .NET è un linguaggio orientato agli oggetti che, al pari di C\#, viene compilato per la piattaforma .NET. Nel progetto è stato impiegato per il modulo di interfaccia integrato nel gestionale. La scelta non è stata discrezionale, ma dettata da un vincolo di omogeneità: il modulo di pianificazione del reparto _Delivery_ in cui il chatbot si innesta è interamente scritto in Visual Basic .NET, e l'integrazione richide di operare direttamente sugli oggetti dell'interfaccia esistente - leggere lo stato del pianificatore, applicare in anteprima le proposte e agganciarsi al flusso di salvataggio - attività che impongono di sviluppare nello stesso linguaggio e nello stesso processo del modulo ospitante.
+Visual Basic .NET è un linguaggio orientato agli oggetti che, al pari di C\#, viene compilato per la piattaforma .NET. Nel progetto è stato impiegato per il modulo di interfaccia integrato nel gestionale. La scelta non è stata discrezionale, ma dettata da un vincolo di omogeneità: il modulo di pianificazione del reparto _Delivery_ in cui il chatbot si innesta è interamente scritto in Visual Basic .NET, e l'integrazione richiede di operare direttamente sugli oggetti dell'interfaccia esistente --- leggere lo stato del pianificatore, applicare in anteprima le proposte e agganciarsi al flusso di salvataggio --- attività che impongono di sviluppare nello stesso linguaggio e nello stesso processo del modulo ospitante.
 
 == Microsoft Semantic Kernel
-Semantic Kernel è il framework di orchestrazione LLM utilizzato nel client. Fornisce l'astrazione del _Kernel_ (host del modello e dei plugin), il _function calling_ automatico - è il framework a decidere e auto-invocare i tool in base al ragionamento del modello - e una catena di filtri che permette di intercettare ogni invocazione di strumento.\
+Semantic Kernel è il framework di orchestrazione LLM utilizzato nel client. Fornisce l'astrazione del _Kernel_ (host del modello e dei plugin), il _function calling_ automatico --- è il framework a decidere e auto-invocare i tool in base al ragionamento del modello --- e una catena di filtri che permette di intercettare ogni invocazione di strumento.\
 Quest'ultimo meccanismo è stato sfruttato per l'anti-loop, l'osservabilità e il rinnovo del token. I tool MCP esposti dal server vengono mappati in funzioni del _kernel_ e resi invocabili dal modello.
 
 == SDK del Model Context Protocol
@@ -40,7 +40,9 @@ Quest'ultimo meccanismo è stato sfruttato per l'anti-loop, l'osservabilità e i
     caption: [Logo di MCP.],
     image("../images/mcp-logo.png", alt: "Logo MCP", width: 30%)
 )
-Il protocollo MCP, descritto concettualmente nel @cap:stato-arte, è stato adottato attraverso il relativo SDK per .NET, disponibile solo su .NET 10. L'SDK fornisce le primitive per costruire un server di tool (annotazioni `[McpServerTool]`, trasporto _stdio_) e per realizzare il lato client che scopre i tool a runtime e li espone al modello. È la dipendenza che ha imposto l'uso di .NET 10 per i nuovi componenti.
+L'integrazione del protocollo MCP, descritto concettualmente nella @cap:stato-arte, è stata realizzata avvalendosi del relativo SDK per .NET.
+Questa libreria costituisce la dipendenza fondamentale che ha imposto l'uso di .NET 10 per i nuovi componenti del sistema, essendone un requisito tecnico imprescindibile.
+Dal punto di vista implementativo, l'SDK fornisce tutti i blocchi costitutivi per l'architettura: per il lato server, semplifica l'esposizione delle funzionalità aziendali e gestisce la comunicazione bidirezionale tramite i canali standard di _input/output_; per il lato client, offre meccanismi per interrogare il server, mappare a _runtime_ gli strumenti esposti e tradurli in interfacce comprensibili per il modello linguistico.
 
 
 == Endpoint LLM e Ollama
@@ -50,7 +52,13 @@ Il protocollo MCP, descritto concettualmente nel @cap:stato-arte, è stato adott
 )
 L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato su un server aziendale con runtime di tipo #linkfn("https://ollama.com/")[Ollama]. Ollama è uno strumento _open source_ che facilita l'esecuzione, la gestione e il _deployment_ di LLM in ambienti locali: a differenza delle soluzioni _cloud_, consente di eseguire i modelli direttamente sull'infrastruttura ospite, garantendo privacy dei dati e assenza di latenza verso API di terze parti, e offre un'interfaccia conforme allo standard delle API OpenAI#footnote[Società di ricerca e sviluppo che fornisce API per modelli linguistici generativi.]. Questa compatibilità ha permesso di interrogare il modello tramite librerie client standard, mantenendo il sistema indipendente dallo specifico motore di inferenza. L'esecuzione in locale è resa praticabile dalla _quantizzazione_, tecnica che riduce la precisione numerica dei pesi della rete abbassandone i requisiti di memoria e di calcolo.
 
-Il modello adottato è *Gemma 4 12B*. La scelta non è stata immediata ma è il risultato di una fase di sperimentazione comparativa. In una prima fase sono stati condotti numerosi test con modelli della famiglia Qwen, dotati di una catena di ragionamento esplicito (_thinking_) tipicamente vantaggiosa per i compiti di pianificazione. Tali test hanno però evidenziato un comportamento problematico: durante la fase di ragionamento il modello tendeva a "incepparsi", sviluppando catene logiche che si autoalimentavano fino a convincersi di premesse non vere, con conseguenti allucinazioni nelle proposte finali. Gemma 4 12B, a parità di prompt e di strumenti a disposizione, ha mostrato in pratica una minore incidenza di allucinazioni e una maggiore aderenza ai dati effettivamente recuperati tramite i tool, requisito qualitativo prioritario per un sistema di supporto decisionale (cfr. requisito `QMR1`, coerenza delle risposte con il contesto). Per questa ragione la scelta è ricaduta su Gemma. L'indipendenza dal motore di inferenza garantita dall'interfaccia OpenAI-compatibile ha reso questo confronto agevole, poiché il cambio di modello non ha richiesto modifiche al codice client.
+#figure(
+    caption: [Logo di Qwen.],
+    image("../images/Qwen_Logo.png", alt: "Logo Qwen", width: 60%)
+)
+
+Per il motore di inferenza è stato adottato un modello della famiglia #linkfn("https://qwen.ai/home")[*Qwen*], scelta motivata dalle sue spiccate capacità di ragionamento logico.
+Le dinamiche che hanno guidato la selezione della versione e taglia dello specifico modello sono descritte nella @sez:scelta-modello.
 
 
 == Visual Studio 2026

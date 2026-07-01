@@ -55,7 +55,7 @@ I dati di autorizzazione nascono nella sessione Agilis dell'operatore già auten
 
 La scadenza del JWT durante una conversazione - la sessione usa token a tempo - è gestita con una difesa stratificata, articolata su più livelli: un margine di scadenza che rinnova il token poco prima della sua effettiva invalidazione senza attendere l'errore 401; una rilettura del provider che, su 401, ritenta con il token più recente già disponibile; un _refresh_ reattivo che, riconosciuto un apposito segnale di token scaduto, ne richiede uno nuovo ad Agilis e ritenta l'operazione; un _refresh_ proattivo che aggiorna il token tra un turno e l'altro; e un unico punto di verità che custodisce il _bearer_ corrente. La meccanica di dettaglio di questi livelli è descritta nel capitolo di implementazione.
 
-== Pattern Architetturali adottati
+== Pattern Architetturali adottati <sez:pattern-architetturali>
 I pattern architetturali non sono fini a sé stessi: ciascuno risolve un problema specifico imposto dai vincoli o dai requisiti non funzionali. I più significativi sono il pattern *Adapter*, che disaccoppia il pannello chatbot da XSPMPRIS facendo dipendere il _ViewModel_ solo da interfacce; il *Decorator*, usato per costruire l'orchestratore reale in _background_ ed evitare il blocco del _thread_ di interfaccia; la *Chain of Responsibility*, realizzata dai filtri di auto-invocazione per anti-loop, osservabilità e _refresh_ del token; il *Memento*, per lo _snapshot_ di _rollback_ dell'anteprima; e un insieme di *macchine a stati* per la pulizia e lo smistamento dello _stream_ del modello. Il catalogo completo dei pattern, con la relativa motivazione, è riportato in #link(<cap:A-appendice>)[Appendice A].
 
 == Decisioni architetturali e _trade-off_

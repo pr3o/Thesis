@@ -23,7 +23,7 @@ Per risolvere il suddetto problema di interoperabilità è stato introdotto il #
 L'architettura si basa su una chiara separazione dei ruoli secondo un pattern _host-client-server_. Un *server MCP* è un processo indipendente che espone in modo standardizzato tre tipi di risorse primitive: i _prompt_ (modelli di istruzioni preconfigurati), le _resource_ (dati testuali o binari in sola lettura) e i _tool_ (funzioni eseguibili che interrogano o modificano sistemi esterni, descritte tramite JSON Schema). Un *host* --- come un #gl("ide") o un assistente conversazionale --- istanzia, per ciascun server a cui si collega, un *client MCP* che ne media la comunicazione: il client interroga il server per scoprirne le capacità, ne inoltra gli schemi al modello e, quando questo richiede l'invocazione di uno strumento, instrada la chiamata al server e ne restituisce la risposta.\
 
 #figure(
-    caption: [Rappresentazione architetturale di alto livello del Model Context Protocol (MCP).],
+    caption: [Rappresentazione architetturale di alto livello del Model Context Protocol (MCP).\ *Source:* _#link("https://modelcontextprotocol.io/docs/getting-started/intro")_ ],
     image("../images/mcp-simple-diagram.png", width: 120%)
 )<fig:mcp-diagram>
 

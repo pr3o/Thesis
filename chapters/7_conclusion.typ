@@ -18,10 +18,14 @@ Una volta terminato il progetto ho redatto il consuntivo orario finale nella @fi
   table(
     columns: 2,
     table.header([*Fase*], [*Ore*]),
-    [_Onboarding_ del progetto],[5],
-    [Analisi dei requisiti],[30],
-    [...], [...],
-    [*Totale*],[320]
+    [Formazione inziale e studio del sistema],[24],
+    [Analisi dei requisiti],[16],
+    [Progettazione del sistema], [28],
+    [Sviluppo del _chatbot_ e integrazione con il pianificatore], [150],
+    [Test funzionali], [22],
+    [Miglioramento e ottimizzazione del sistema], [40],
+    [Documentazione tecnica e revisione finale], [24],
+    [*Totale*],[304]
   )
 )<fig:tabella-calcolo-ore>
 #v(1em)
@@ -35,14 +39,14 @@ Arrivato alla fine del progetto ho implementato...
   table(
     columns: (auto, 1fr, 1fr, auto, auto),
     table.header([*Tipo*], [*Mandatory*], [*Desirable*],[*Optional*], [*Somma*]),
-    [Functional], [0/#getFR(getLen: true).at(0)], [0/#getFR(getLen: true).at(1)], [0/#getFR(getLen: true).at(2)], [0/#getFR(getLen: true).sum()],
-    [Qualitative], [0/#getQR(getLen: true).at(0)], [0/#getQR(getLen: true).at(1)], [0/#getQR(getLen: true).at(2)], [0/#getQR(getLen: true).sum()],
-    [Constraint], [0/#getCR(getLen: true).at(0)], [0/#getCR(getLen: true).at(1)], [0/#getCR(getLen: true).at(2)], [0/#getCR(getLen: true).sum()],
+    [Functional], [17/#getFR(getLen: true).at(0)], [7/#getFR(getLen: true).at(1)], [0/#getFR(getLen: true).at(2)], [24/#getFR(getLen: true).sum()],
+    [Qualitative], [4/#getQR(getLen: true).at(0)], [2/#getQR(getLen: true).at(1)], [0/#getQR(getLen: true).at(2)], [6/#getQR(getLen: true).sum()],
+    [Constraint], [4/#getCR(getLen: true).at(0)], [0/#getCR(getLen: true).at(1)], [0/#getCR(getLen: true).at(2)], [4/#getCR(getLen: true).sum()],
     [*Totale*],
-      [*0/#{getFR(getLen: true).at(0)+getQR(getLen: true).at(0)+getCR(getLen: true).at(0)}*],
-      [*0/#{getFR(getLen: true).at(1)+getQR(getLen: true).at(1)+getCR(getLen: true).at(1)}*],
+      [*25/#{getFR(getLen: true).at(0)+getQR(getLen: true).at(0)+getCR(getLen: true).at(0)}*],
+      [*9/#{getFR(getLen: true).at(1)+getQR(getLen: true).at(1)+getCR(getLen: true).at(1)}*],
       [*0/#{getFR(getLen: true).at(2)+getQR(getLen: true).at(2)+getCR(getLen: true).at(2)}*],
-      [*0/#{getFR(getLen: true).sum()+getQR(getLen: true).sum()+getCR(getLen: true).sum()}*],
+      [*34/#{getFR(getLen: true).sum()+getQR(getLen: true).sum()+getCR(getLen: true).sum()}*],
     align: (center+horizon)
   ),
   caption: "Riepilogo dei requisiti soddisfatti."
@@ -55,7 +59,9 @@ I rischi emersi durante lo stage sono riportati in @fig:rischi-occorsi.\
   table(
     columns: 2,
     table.header([*Descrizione*],[*Mitigazione*]),
-    [*R1* -- Descrizione del rischio],[Soluzione]
+    [*R1* -- Complessità architettura legacy di Agilis e difficoltà di orientamento nel dominio applicativo.],[Confronti periodici con i colleghi per approfondire i flussi logici e il patrimonio informativo aziendale.],
+    [*R2* -- Difficoltà di apprendimento nell'implementazione delle nuove tecnologie (MCP, Semantic Kernel, .NET 10).],[Supporto del tutor, ricerca documentale autonoma e utilizzo mirato dell'IA per l'analisi dei punti critici.],
+    [*R3* -- Imprevisti medici e difficoltà logistiche negli spostamenti verso la sede aziendale.],[Rimodulazione delle presenze in accordo con l'azienda e attivazione dello smart working parziale per rispettare le scadenze.]
   )
 )<fig:rischi-occorsi>
 #v(1em)

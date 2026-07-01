@@ -48,7 +48,7 @@ Dal punto di vista implementativo, l'SDK fornisce tutti i blocchi costitutivi pe
 == Endpoint LLM e Ollama
 #figure(
     caption: [Logo di Ollama.],
-    image("../images/Ollama-logo.png", alt: "Logo Ollama", width: 20%)
+    image("../images/Ollama-logo.png", alt: "Logo Ollama", width: 30%)
 )
 L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato su un server aziendale con runtime di tipo #linkfn("https://ollama.com/")[Ollama]. Ollama è uno strumento _open source_ che facilita l'esecuzione, la gestione e il _deployment_ di LLM in ambienti locali: a differenza delle soluzioni _cloud_, consente di eseguire i modelli direttamente sull'infrastruttura ospite, garantendo privacy dei dati e assenza di latenza verso API di terze parti, e offre un'interfaccia conforme allo standard delle API OpenAI#footnote[Società di ricerca e sviluppo che fornisce API per modelli linguistici generativi.]. Questa compatibilità ha permesso di interrogare il modello tramite librerie client standard, mantenendo il sistema indipendente dallo specifico motore di inferenza. L'esecuzione in locale è resa praticabile dalla _quantizzazione_, tecnica che riduce la precisione numerica dei pesi della rete abbassandone i requisiti di memoria e di calcolo.
 

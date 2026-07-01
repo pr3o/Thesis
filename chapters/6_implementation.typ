@@ -20,14 +20,12 @@ L'elenco completo è riportato in #link(<cap:B-appendice>)[Appendice B].
 Il secondo aspetto critico è la sicurezza _multi-tenant_, che concretizza quanto anticipato nella @sez:sicurezza-token. L'identità di _tenant_ non è mai un parametro di _query_ controllabile dal chiamante: è derivata dal _token_.
 Un middleware (`SympAuthorizeMiddleware`) valida il _Bearer_ JWT a ogni richiesta ed estrae dai claim i valori di `Azienda` e `Ditta`, che vengono resi disponibili ai _controller_ tramite il servizio di contesto `ICallContextDataService`. Ciascun _controller_, prima di interrogare il database, recupera il codice ditta dal contesto e lo applica come filtro obbligatorio in ogni _query_:
 
-#v(1em)
 ```cs
 var codditt = _callContextDataService.GetRequestBase().Ditta;
 // ...ogni query LINQ vincola i risultati alla ditta dell'operatore:
 var risultati = _db.Risorse.Where(og => og.codditt == codditt && /* altri filtri */);
 
 ```
-#v(1em)
 
 In questo modo il confinamento dei dati alla ditta dell'operatore è garantito a livello di codice e non può essere aggirato da un parametro malevolo o da un'allucinazione del modello: anche se l'LLM richiedesse dati di un'altra azienda, la query resterebbe vincolata al _tenant_ ricavato dal _token_.
 
@@ -59,7 +57,6 @@ Le tre strategie di delega deterministica introdotte in @sez:strategia-anti-allu
 - *_Tool_ ad alta granularità.* I _tool_ `trova_risorsa_disponibile` e `get_spazi_liberi` non sono semplici letture, ma calcoli compositi: invece di esporre al modello gli strumenti elementari (calendario, appuntamenti) lasciandogli dedurre mentalmente le intersezioni temporali --- operazione su cui un modello a 9B allucina facilmente --- restituiscono fasce orarie libere già calcolate. La logica risiede nel componente `DisponibilitaCore`, interno al _server_ MCP, che recupera dalle API di Symposium il calendario dei turni e gli impegni della risorsa nell'intervallo richiesto e ne calcola la differenza insiemistica. Il metodo `FinestreLavorative` traduce le regole del calendario aziendale in slot lavorativi concreti per ogni giorno del periodo (escludendo giorni non lavorativi e pause); il metodo `Libere` sottrae da queste finestre gli impegni esistenti, con una scansione lineare a cursore, come si vede in @cod:fasce-libere. Il risultato è un elenco ordinato e privo di sovrapposizioni, restituito al modello come dato finito. Spostando questo calcolo nel software deterministico si elimina alla radice una delle principali fonti di errore aritmetico-temporale del modello, in linea con la strategia di delega descritta nella @sez:strategia-anti-allucinazione.
 
 
-#v(1em)
 #figure(caption: [Calcolo deterministico delle fasce libere per sottrazione degli impegni dalle finestre lavorative.])[
 ```cs
 // Sottrae gli impegni dalle finestre lavorative, restituendo le fasce libere.
@@ -86,7 +83,6 @@ internal static List<Slot> Libere(List<Slot> finestre, List<Slot> impegni)
 }
 
 ```]<cod:fasce-libere>
-#v(1em)
 
 
 - *Contenimento dell'esposizione e del contesto.* Dei numerosi _endpoint_ disponibili in Symposium sono stati resi invocabili unicamente i sette _tool_ core legati alla pianificazione (appuntamenti, task, risorse, competenze, turni calendario, spazi liberi, risorsa disponibile), riducendo la superficie decisionale del modello.
@@ -100,7 +96,7 @@ Affinché il modello ragioni su dati pertinenti, il lato Agilis deve tradurre lo
 
 - *Costruzione del contesto.* Il componente `XspmprisContextAdapter` legge dal _ViewModel_ dello _scheduler_ la finestra temporale effettivamente renderizzata, le risorse visibili e gli appuntamenti che vi ricadono, applicando gli stessi filtri attivi nell'interfaccia (periodo, risorsa selezionata). Il punto delicato è il contenimento del rumore informativo, anticipato nella @sez:strategia-anti-allucinazione: un contesto troppo ampio degrada la qualità delle risposte e gonfia il costo in _token_. Per questo il numero di appuntamenti trasmessi è limitato a un tetto rigido; in caso di superamento, l'eccesso viene troncato in ordine cronologico e la circostanza viene segnalata esplicitamente al modello tramite un _flag_ di contesto, così che possa invitare l'operatore a restringere il periodo anziché ragionare su dati parziali in modo silenzioso:
 
-#v(1em)
+
 #figure(caption: [Tetto al numero di appuntamenti immessi nel contesto, con segnalazione del troncamento al modello.])[
 ```vb
 Const MaxAppuntamentiContesto As Integer = 20
@@ -113,7 +109,7 @@ If ctx.AppuntamentiVisibili.Count > MaxAppuntamentiContesto Then
         $"mostrati {MaxAppuntamentiContesto} di {totale}: restringi il periodo o le risorse"
 End If
 ```]
-#v(1em)
+
 
 - *Estrazione degli allegati.* Per soddisfare i requisiti di arricchimento del contesto tramite file, un servizio dedicato (`AttachmentExtractionService`) normalizza documenti eterogenei in testo. Il servizio funge da dispatcher verso estrattori specializzati, selezionati per estensione: i fogli Excel vengono convertiti in tabelle _Markdown_ tramite `DevExpress.Spreadsheet` (con un tetto di righe per foglio); i PDF vengono estratti con `DevExpress.Pdf`; le email sono gestite nel formato `.msg` tramite la libreria _MsgReader_ e nel formato `.eml` tramite _MimeKit_, producendo un'intestazione strutturata (mittente, destinatari, data, oggetto) seguita dal corpo ripulito dalle citazioni. Per contenere l'occupazione di contesto, ogni allegato è troncato a circa sedicimila caratteri e ogni turno ammette al più cinque allegati.
 #v(1em)
@@ -127,7 +123,7 @@ Il componente centrale è `XspmprisChangesetApplier`, che applica un _changeset_
 Ogni elemento toccato viene marcato come proposto dal chatbot (`IsProposedByChatbot`) e collegato all'identificativo del _changeset_, così da essere distinguibile visivamente e ripristinabile in blocco.
 Il punto delicato è il _rollback_: la classe `TimelineItem` adotta un _dirty tracking_ automatico per cui ogni assegnazione sporca il _flag_ `HasChanges`.
 Per non perdere lo stato originale si applica il pattern *Memento*, salvando uno snapshot pre-modifica (`PreChatbotSnapshot`) prima di mutare l'oggetto; il valore "pulito" di `HasChanges` viene catturato prima della clonazione e riassegnato per ultimo.
-#v(1em)
+
 #figure(caption: [Applicazione di un'operazione di modifica con _snapshot Memento_.])[
 ```vb
 Case OperazioneTipo.Update
@@ -147,7 +143,7 @@ Case OperazioneTipo.Update
         target.HasChanges = True
     End If
 ```]
-#v(1em)
+
 La conferma non è un'azione speciale dell'AI: `ConfermaAnteprima` si limita a scartare lo _snapshot_ di _rollback_ e a ripulire i _marker_, lasciando `HasChanges = True` affinchè la modifica venga persistita dal normale flusso di salvataggio di Agilis. L'annullamento (`AnnullaAnteprima`) percorre la strada inversa: ripristina gli `Update` dal `PreChatbotSnapshot`, rimuove le creazioni (riconoscibili dal `Progr` temporaneo negativo) e reintegra le eliminazioni dalla collezione `DeletedItems`.
 
 L'intera interazione è governata da una macchina a stati esplicita (`PanelMode`) che rende mutualmente esclusivi gli stati del pannello e ne disciplina le transizioni: `Idle`, `AwaitingResponse`, `Browsing`, `Selected`, `Previewing`, `Refining`.
@@ -156,7 +152,6 @@ L'intera interazione è governata da una macchina a stati esplicita (`PanelMode`
 Lo streaming dei _token_ dall'_endpoint_ remoto pone due problemi: separare il testo destinato all'utente dalla catena di ragionamento (_thinking_), e farlo su un flusso SSE in cui i marcatori possono arrivare spezzati a cavallo di due _chunk_. 
 
 La separazione è realizzata da un `DelegatingHandler` HTTP (`OllamaThinkingHandler`) interposto sul client: in fase di richiesta inietta il _flag_ `think` per abilitare il _reasoning_ del modello; in fase di risposta avvolge lo stream in un `ReasoningToThinkStream` che normalizza l'_output_ marcando il ragionamento con _tag_ `<think>...</think>`.
-#v(1em)
 #figure(caption: [_Handler_ che abilita il _thinking_ e normalizza lo _stream_ SSE.])[
 ```cs
 protected override async Task<HttpResponseMessage> SendAsync(
@@ -181,7 +176,6 @@ protected override async Task<HttpResponseMessage> SendAsync(
     return response;
 }
 ```]
-#v(1em)
 A valle, l'orchestratore consuma il flusso normalizzato con una macchina a stati (lo _stripper_) che instrada i frammenti sui canali corretti --- testo visibile e ragionamento --- gestendo i marcatori `<think>` eventualmente spezzati tra due _chunk_ e ripulendo l'_output_ da blocchi residui.
 Da qui nascono gli eventi `delta` e `thinking` inviati ad Agilis. Questa scelta di disaccoppiamento garantisce inoltre l'indipendenza dallo specifico motore: con un _proxy_ che espone già i _tool-call_ SSE nativi, l'iniezione è disabilitata e il flusso passa invariato.
 
@@ -189,7 +183,6 @@ Da qui nascono gli eventi `delta` e `thinking` inviati ad Agilis. Questa scelta 
 La difesa stratificata anticipata della @sez:sicurezza-token si concretizza su livelli collocati in punti diversi della catena di processi, secondo il principio di minimizzazione dei segreti: la password non lascia mai Agilis, e solo il JWT attraversa i confini di processo, come _Bearer_.
 #v(1em)
 1. *Margine di scadenza con _fallback_(lato Agilis).* Il connettore verso Symposium rinnova il _token_ *prima* della sua invalidazione, senza attendere l'errore 401, sfruttando il _refresh token_. Se anche il _refresh token_ risulta scaduto --- caso tipico dopo lunghe inattività --- il connettore non propaga l'errore: azzera la sessione e ricade su un _login_ completo con le credenziali ancora custodite nel processo Agilis, ripristinando in modo trasparente una sessione valida.
-#v(1em)
 #figure(caption: [Margine di scadenza lato Agilis.])[
 ```cs
 public async Task AuthenticateIfNecessary()
@@ -215,7 +208,6 @@ public async Task AuthenticateIfNecessary()
     // aggiorna _loginResponse e configura il bearer
 }
 ```]
-#v(1em)
 2. *Ritentativo col _token_ corrente (lato _server_ MCP).* Prima di arrendersi, il _client_ REST del _server_ è configurato con `WithActionOnUnauthorized`: su 401 rilegge dal provider il _token_ più recente disponibile, riconfigura il _bearer_ e ritenta la chiamata una volta. Solo se anche questo tentativo fallisce, il _server_ traduce il 401 in un _sentinel value_ testuale, `__AUTH_EXPIRED`, poichè il canale verso il _client_ trasporta solo stringhe e non può veicolare eccezioni tipizzate.
 #v(1em)
 #figure(caption: [Traduzione del 401 in un _sentinel_ lato _server_ MCP.])[
@@ -230,7 +222,6 @@ public static string FormatResponse(RestResponseWithData<byte[]> resp)
 ```]
 #v(1em)
 3. *Refresh reattivo (lato _client_).* Un filtro di auto-invocaziome (`SymposiumAuthRefreshFilter`) riconnosce la _sentinel_ nel risultato di un _tool_, richiede un nuovo _token_ ad Agilis attraverso la _pipe_, lo applica al _server_ tramite il _tool_ di _control-plane_ `SetSymposiumToken` e ri-invoca l'operazione una sola volta. Un semaforo serializza i 401 paralleli in un unico _refresh_.
-#v(1em)
 #figure(caption: [_Refresh_ reattivo del _token_ su _sentinel_ `__AUTH_EXPIRED`.])[
 ```cs
 public async Task OnAutoFunctionInvocationAsync(
@@ -256,5 +247,4 @@ public async Task OnAutoFunctionInvocationAsync(
     context.Result = await context.Function.InvokeAsync(context.Kernel, context.Arguments); // retry
 }
 ```]
-#v(1em)
 4. *_Refresh_ proattivo tra turni e* 5. *unico punto di verità.* Tra un turno e l'altro Agilis può inviare al _client_ un _token_ aggiornato, propagato al _server_ con lo stesso _tool_ di _control-plane_; il `SymposiumTokenProvider`, *singleton* _thread-safe_ nel _server_ MCP, custodisce l'unica copia mutabile del _bearer_ corrente. La combinazione dei cinque livelli rende la conversazione resiliente alla scadenza del JWT senza mai interromperla.

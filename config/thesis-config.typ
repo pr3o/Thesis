@@ -62,7 +62,7 @@
   }
   // Il comando sotto lo tengo commentato perché altrimenti può succedere che l'immagine e la sua caption finiscano in due pagine diverse.
   // Per questo motivo ogni tabella deve essere racchiusa in un blocco di codice #{ } o di contenuto #[ ] per isolarne le regole. (se trovate un modo migliore aprite una pr :D )
-  //show figure: set block(breakable: true)
+  show figure: set block(breakable: true)
 
   // Glossary bootstrap and setup
   show: make-glossary

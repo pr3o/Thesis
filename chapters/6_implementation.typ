@@ -15,7 +15,7 @@ Tutti gli _endpoint_ condividono il prefisso di rotta `mcp/<Risorsa>` e restano 
 La superficie esposta copre l'intero dominio della pianificazione --- risorse e competenze, task di commessa, calendario lavorativo dei turni, appuntamenti --- affiancata da endpoint di area gestionale (documenti, ordini, offerte, scadenze, anagrafica, articoli) e da pochi endpoint di scrittura (CreaDocumento, CreaOfferta). 
 L'elenco completo è riportato in #link(<cap:B-appendice>)[Appendice B].
 
-È importante notare che il _plugin_ è deliberatamente più ampio di quanto il _chatbot_ utilizzi: al modello vengono esposti unicamente i sette tool di sola lettura legati alla pianificazione (cfr. @sez:strategia-anti-allucinazione-implementazione), mentre gli _endpoint_ di scrittura restano fuori dal perimetro dell'assistente, coerentemente con il principio per cui l'AI non persiste mai direttamente sul database (`CMR3`).
+È importante notare che il _plugin_ è deliberatamente più ampio di quanto il _chatbot_ utilizzi: al modello vengono esposti unicamente otto tool di sola lettura legati alla pianificazione (cfr. @sez:strategia-anti-allucinazione-implementazione), affiancati da un *_plugin_ nativo locale* per la validazione delle proposte. Gli _endpoint_ di scrittura restano fuori dal perimetro dell'assistente, coerentemente con il principio per cui l'AI non persiste mai direttamente sul database (`CMR3`).
 
 Il secondo aspetto critico è la sicurezza _multi-tenant_, che concretizza quanto anticipato nella @sez:sicurezza-token. L'identità di _tenant_ non è mai un parametro di _query_ controllabile dal chiamante: è derivata dal _token_.
 Un middleware (`SympAuthorizeMiddleware`) valida il _Bearer_ JWT a ogni richiesta ed estrae dai claim i valori di `Azienda` e `Ditta`, che vengono resi disponibili ai _controller_ tramite il servizio di contesto `ICallContextDataService`. Ciascun _controller_, prima di interrogare il database, recupera il codice ditta dal contesto e lo applica come filtro obbligatorio in ogni _query_:
@@ -85,7 +85,7 @@ internal static List<Slot> Libere(List<Slot> finestre, List<Slot> impegni)
 ```]<cod:fasce-libere>
 
 
-- *Contenimento dell'esposizione e del contesto.* Dei numerosi _endpoint_ disponibili in Symposium sono stati resi invocabili unicamente i sette _tool_ core legati alla pianificazione (appuntamenti, task, risorse, competenze, turni calendario, spazi liberi, risorsa disponibile), riducendo la superficie decisionale del modello.
+- *Contenimento dell'esposizione e del contesto.* Dei numerosi _endpoint_ disponibili in Symposium sono stati resi invocabili unicamente gli otto _tool_ _core_ legati alla pianificazione (cfr. @tab:tools), riducendo la superficie decisionale del modello.
 
 #v(1em)
 

@@ -1,11 +1,34 @@
 #import "../config/thesis-config.typ": glpl, gl
 #import "data/requirements_list.typ": *
+#import "data/implemetations.typ": *
 
 #pagebreak(to:"odd")
 = Listati di codice <cap:B-appendice>
 == _Endpoint_ REST
 
-== Mappa dei _tool_ MCP esposti
+La colonna _Esposto_ indica se l'_endpoint_ è reso invocabile dal modello (✔) o se è disponibile nel _plugin_ ma fuori dal perimetro del chatbot (✘).
+
+#figure(
+  table(
+    columns: (2fr, 3.5fr, 2fr, 3fr),
+    align: (center + horizon, left + horizon, center + horizon, left + horizon),
+    table.header([*Metodo*], [*Rotta*], [*Esposto*], [*Descrizione*]),
+    ..getEndpoints().flatten()
+  ),
+  caption: [Lista degli _endpoint_ esposti da Symposium per il _server_ MCP.],
+)<tab:endpoints>
+
+== Mappa degli strumenti esposti al modello
+Di seguito la mappa completa degli strumenti a disposizione del modello linguistico, suddivisi in base alla loro natura architetturale: strumenti remoti esposti tramite protocollo MCP e _plugin nativi_ iniettati localmente nel Semantic Kernel.
+#figure(
+  table(
+    columns: (2.5fr, 1fr, 2fr),
+    align: (center + horizon, left + horizon, left + horizon),
+    table.header([*Tool*], [*Tipo*], [*Fonte*]),
+    ..getTools().flatten()
+  ),
+  caption: [Mappa _tool_ MCP esposti --> fonti dati.],
+)<tab:tools>
 
 == Interfacce di disaccoppiamento
 

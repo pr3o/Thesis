@@ -13,7 +13,7 @@
     caption: [Logo di .NET.],
     image("../images/DOTNET-logo.png", alt: "Logo DOTNET", width: 30%)
 )
-#linkfn("https://dotnet.microsoft.com/it-it/")[.NET] è la piattaforma di sviluppo ed esecuzione creata da Microsoft su cui vengono eseguiti i linguaggi C\# e Visual Basic .NET; fornisce un'estesa libreria di classi base e gestisce l'esecuzione sicura del codice tramite _Common Language Runtime_ e _garbage collection_. Occorre però distinguere due famiglie:
+#linkfn("https://dotnet.microsoft.com/it-it/")[.NET] @dotnet è la piattaforma di sviluppo ed esecuzione creata da Microsoft su cui vengono eseguiti i linguaggi C\# e Visual Basic .NET; fornisce un'estesa libreria di classi base e gestisce l'esecuzione sicura del codice tramite _Common Language Runtime_ e _garbage collection_. Occorre però distinguere due famiglie:
 - *.NET Framework*: storico e disponibile solo su Windows, la cui versione finale è la 4.8;
 - *.NET moderno*: multipiattaforma e _open-source_, giunto alla versione 10.
 
@@ -45,19 +45,19 @@ Questa libreria costituisce la dipendenza fondamentale che ha imposto l'uso di .
 Dal punto di vista implementativo, l'SDK fornisce tutti i blocchi costitutivi per l'architettura: per il lato server, semplifica l'esposizione delle funzionalità aziendali e gestisce la comunicazione bidirezionale tramite i canali standard di _input/output_; per il lato client, offre meccanismi per interrogare il server, mappare a _runtime_ gli strumenti esposti e tradurli in interfacce comprensibili per il modello linguistico.
 
 
-== Endpoint LLM e Ollama
+== #gl("endpoint") LLM e Ollama
 #figure(
     caption: [Logo di Ollama.],
     image("../images/Ollama-logo.png", alt: "Logo Ollama", width: 25%)
 )
-L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato su un server aziendale con runtime di tipo #linkfn("https://ollama.com/")[Ollama]. Ollama è uno strumento _open source_ che facilita l'esecuzione, la gestione e il _deployment_ di LLM in ambienti locali: a differenza delle soluzioni _cloud_, consente di eseguire i modelli direttamente sull'infrastruttura ospite, garantendo privacy dei dati e assenza di latenza verso API di terze parti, e offre un'interfaccia conforme allo standard delle API OpenAI#footnote[Società di ricerca e sviluppo che fornisce API per modelli linguistici generativi.]. Questa compatibilità ha permesso di interrogare il modello tramite librerie client standard, mantenendo il sistema indipendente dallo specifico motore di inferenza. L'esecuzione in locale è resa praticabile dalla _quantizzazione_, tecnica che riduce la precisione numerica dei pesi della rete abbassandone i requisiti di memoria e di calcolo.
+L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato su un server aziendale con runtime di tipo #linkfn("https://ollama.com/")[Ollama] @ollama. Ollama è uno strumento _open source_ che facilita l'esecuzione, la gestione e il _deployment_ di LLM in ambienti locali: a differenza delle soluzioni #gl("cloud"), consente di eseguire i modelli direttamente sull'infrastruttura ospite, garantendo privacy dei dati e assenza di latenza verso API di terze parti, e offre un'interfaccia conforme allo standard delle API OpenAI#footnote[Società di ricerca e sviluppo che fornisce API per modelli linguistici generativi.] @openai. Questa compatibilità ha permesso di interrogare il modello tramite librerie client standard, mantenendo il sistema indipendente dallo specifico motore di inferenza. L'esecuzione in locale è resa praticabile dalla #gl("quantizzazione"), tecnica che riduce la precisione numerica dei pesi della rete abbassandone i requisiti di memoria e di calcolo.
 
 #figure(
     caption: [Logo di Qwen.],
     image("../images/Qwen_Logo.png", alt: "Logo Qwen", width: 60%)
 )
 
-Per il motore di inferenza è stato adottato un modello della famiglia #linkfn("https://qwen.ai/home")[*Qwen*], sviluppata da Alibaba Cloud. Qwen è una famiglia di _Large Language Model_ _open-source_ con spiccate capacità di ragionamento logico-deduttivo e comprensione multilingue, italiano compreso. La famiglia offre un supporto nativo alla catena di ragionamento esplicita (_thinking chain_): il modello può separare il proprio monologo interno (visibile all'operatore come canale di trasparenza) dalla risposta destinata all'utente, abilitando questo comportamento tramite un semplice _flag_ `think` nel _payload_ della richiesta HTTP. Qwen è disponibile in diverse taglie; per questo progetto sono state valutate la variante a 9 miliardi di parametri (9B) e quella a 27 miliardi (27B), entrambe in versione quantizzata per ridurre i requisiti hardware.
+Per il motore di inferenza è stato adottato un modello della famiglia #linkfn("https://qwen.ai/home")[*Qwen*] @qwen, sviluppata da Alibaba Cloud. Qwen è una famiglia di _Large Language Model_ _open-source_ con spiccate capacità di ragionamento logico-deduttivo e comprensione multilingue, italiano compreso. La famiglia offre un supporto nativo alla catena di ragionamento esplicita (_thinking chain_): il modello può separare il proprio monologo interno (visibile all'operatore come canale di trasparenza) dalla risposta destinata all'utente, abilitando questo comportamento tramite un semplice _flag_ `think` nel _payload_ della richiesta HTTP. Qwen è disponibile in diverse taglie; per questo progetto sono state valutate la variante a 9 miliardi di parametri (9B) e quella a 27 miliardi (27B), entrambe in versione quantizzata per ridurre i requisiti hardware.
 Le dinamiche che hanno guidato la selezione della versione e taglia dello specifico modello sono descritte nella @sez:scelta-modello.
 
 
@@ -66,7 +66,7 @@ Le dinamiche che hanno guidato la selezione della versione e taglia dello specif
     caption: [Logo di Visual Studio 2026.],
     image("../images/vs-logo.png", alt: "Logo Visual Studio 2026.", width: 30%)
 )
-L'intero ciclo di produzione del software è stato orchestrato tramite #linkfn("https://visualstudio.microsoft.com/it/vs/")[Visual Studio 2026], l'ambiente di sviluppo integrato (IDE) impiegato per la stesura, il _debugging_ e la compilazione del codice. Scelto per la profonda integrazione con l'ecosistema .NET e il linguaggio C\#, offre analisi statica, suggerimenti contestuali e profilazione delle prestazioni, oltre a un'interfaccia visuale per il versionamento integrata nell'ambiente.
+L'intero ciclo di produzione del software è stato orchestrato tramite #linkfn("https://visualstudio.microsoft.com/it/vs/")[Visual Studio 2026] @visual-studio, l'ambiente di sviluppo integrato (IDE) impiegato per la stesura, il _debugging_ e la compilazione del codice. Scelto per la profonda integrazione con l'ecosistema .NET e il linguaggio C\#, offre analisi statica, suggerimenti contestuali e profilazione delle prestazioni, oltre a un'interfaccia visuale per il versionamento integrata nell'ambiente.
 
 == Git
 #figure(

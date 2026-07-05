@@ -1,6 +1,6 @@
 #import "../config/constants.typ": abstract
 #import "../config/variables.typ": *
-#import "../config/thesis-config.typ": glossary-style
+#import "../config/thesis-config.typ": glossary-style, gl
 #import "@preview/codly:1.3.0": *
 #import "@preview/codly-languages:0.1.8": *
 #pagebreak(to: "odd")
@@ -11,7 +11,7 @@
 #v(1em)
 Il presente documento descrive il lavoro svolto durante il periodo di stage curricolare, della durata di circa trecentoventi ore, dal laureando #text(myName) presso l'azienda #text(myCompany). Lo stage è stato condotto sotto la supervisione del tutor aziendale #myTutor, mentre il prof. #text(myProf) ha ricoperto il ruolo di tutor accademico.
 \ \
-Questa tesi tratta la progettazione e lo sviluppo di *un modulo chatbot* integrato all'interno del gestionale Agilis, volto a supportare il reparto _Delivery_ nella pianificazione delle attività operative. L'obiettivo è quello di fornire uno strumento di supporto decisionale basato su intelligenza artificiale, in grado di interagire in linguaggio naturale con gli operatori, suggerendo soluzioni di pianificazione intelligente e segnalando eventuali conflitti o vincoli non rispettati.
+Questa tesi tratta la progettazione e lo sviluppo di *un modulo #gl("chatbot")* integrato all'interno del gestionale Agilis, volto a supportare il reparto _Delivery_ nella pianificazione delle attività operative. L'obiettivo è quello di fornire uno strumento di supporto decisionale basato su intelligenza artificiale, in grado di interagire in linguaggio naturale con gli operatori, suggerendo soluzioni di pianificazione intelligente e segnalando eventuali conflitti o vincoli non rispettati.
 
 #linebreak()
 #text(24pt, weight: "semibold")[Organizzazione del testo]
@@ -19,7 +19,7 @@ Questa tesi tratta la progettazione e lo sviluppo di *un modulo chatbot* integra
 #v(1em)
 
 / #link(<cap:introduzione>)[Il primo capitolo]: presenta l'azienda, introduce il progetto e illustra le motivazioni che mi hanno portato a sceglierlo, definendone gli obiettivi e le peculiarità;
-/ #link(<cap:stato-arte>)[Il secondo capitolo]: ripercorre lo stato dell'arte su cui poggia il lavoro: l'evoluzione dei _Large Language Models_, il paradigma del _tool use_ e della _function calling_, il _Model Context Protocol_ e i framework di orchestrazione;
+/ #link(<cap:stato-arte>)[Il secondo capitolo]: ripercorre lo stato dell'arte su cui poggia il lavoro: l'evoluzione dei _Large Language Models_, il paradigma del #gl("tool-use") e della _function calling_, il _Model Context Protocol_ e i #gl("framework") di orchestrazione;
 / #link(<cap:analisi>)[Il terzo capitolo]: analizza gli utenti e i casi d'uso del sistema e ne deriva i requisiti, distinti in funzionali, non funzionali e vincoli, rimandando all'#link(<cap:A-appendice>)[Appendice A] per la specifica completa;
 / #link(<cap:tecnologie-utilizzate>)[Il quarto capitolo]: descrive le tecnologie adottate, motivando le ragioni che ne hanno guidato la scelta;
 / #link(<cap:progettazione>)[Il quinto capitolo]: descrive la progettazione del sistema: l'architettura di distribuzione, i componenti principali e le loro interazioni, il modello di interazione uomo-AI e le principali decisioni architetturali;

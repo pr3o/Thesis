@@ -20,7 +20,7 @@ L'elenco completo è riportato in #link(<cap:B-appendice>)[Appendice B].
 Il secondo aspetto critico è la sicurezza _multi-tenant_ e l'isolamento dei dati, che concretizza quanto anticipato nella @sez:sicurezza-token. L'identità di _tenant_ non è mai un parametro di _query_ controllabile dal chiamante, ma è derivata esclusivamente dal _token_.
 
 La validazione delle richieste entranti è affidata al middleware `SympAuthorizeMiddleware`, che intercetta tutte le comunicazioni prima che qualsiasi _controller_ venga istanziato. Il middleware opera secondo i seguenti passaggi:
-+ *Estrazione*: recupera il _Bearer token_ dall'header `Authorization` della richiesta HTTP.
++ *Estrazione*: recupera il #gl("bearer") dall'header `Authorization` della richiesta HTTP.
 + *Validazione*: verifica la firma crittografica del JWT contro la chiave pubblica di Symposium.
 + *Verifica*: controlla la validità temporale del _token_ (claim `exp`).
 + *Estrazione Claim*: ricava i parametri di contesto (`Azienda` e `Ditta`) direttamente dal _payload_ del JWT.
@@ -364,7 +364,7 @@ public async Task AuthenticateIfNecessary()
     // aggiorna _loginResponse e configura il bearer
 }
 ```]
-2. *Ritentativo col _token_ corrente (lato _server_ MCP).* Prima di arrendersi, il _client_ REST del _server_ è configurato con `WithActionOnUnauthorized`: su 401 rilegge dal provider il _token_ più recente disponibile, riconfigura il _bearer_ e ritenta la chiamata una volta. Solo se anche questo tentativo fallisce, il _server_ traduce il 401 in un _sentinel value_ testuale, `__AUTH_EXPIRED`, poichè il canale verso il _client_ trasporta solo stringhe e non può veicolare eccezioni tipizzate.
+2. *Ritentativo col _token_ corrente (lato _server_ MCP).* Prima di arrendersi, il _client_ REST del _server_ è configurato con `WithActionOnUnauthorized`: su 401 rilegge dal provider il _token_ più recente disponibile, riconfigura il _bearer_ e ritenta la chiamata una volta. Solo se anche questo tentativo fallisce, il _server_ traduce il 401 in un #gl("sentinel") testuale, `__AUTH_EXPIRED`, poichè il canale verso il _client_ trasporta solo stringhe e non può veicolare eccezioni tipizzate.
 #v(1em)
 #figure(caption: [Traduzione del 401 in un _sentinel_ lato _server_ MCP.])[
 ```cs

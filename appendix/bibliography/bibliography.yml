@@ -1,14 +1,104 @@
-'models-and-fair-use':
+vaswani2017:
   type: article
-  title: Foundation Models and Fair Use
+  title: "Attention Is All You Need"
   author:
-  - Henderson, Peter
-  - Li, Xuechen
-  - Jurafsky, Dan
-  - Hashimoto, Tatsunori
-  - Lemley, Mark A.
-  - Liang, Percy
-  date: 2023
-  url: https://arxiv.org/abs/2303.15715
+    - Vaswani, Ashish
+    - Shazeer, Noam
+    - Parmar, Niki
+    - Uszkoreit, Jakob
+    - Jones, Llion
+    - Gomez, Aidan N.
+    - Kaiser, Lukasz
+    - Polosukhin, Illia
+  date: 2017
+  url: https://arxiv.org/abs/1706.03762
   serial-number:
-    arxiv: '2303.15715'
+    arxiv: '1706.03762'
+
+mcp-spec:
+  type: reference
+  title: "Model Context Protocol — Getting Started"
+  author:
+    - Anthropic
+  date: 2025
+  url: https://modelcontextprotocol.io/docs/getting-started/intro
+
+semantic-kernel:
+  type: reference
+  title: "Semantic Kernel — Overview"
+  author:
+    - Microsoft
+  date: 2025
+  url: https://learn.microsoft.com/it-it/semantic-kernel/overview/
+
+langchain:
+  type: reference
+  title: LangChain
+  author:
+    - LangChain Inc.
+  date: 2025
+  url: https://www.langchain.com/
+
+ollama:
+  type: reference
+  title: Ollama
+  author:
+    - Ollama Inc.
+  date: 2025
+  url: https://ollama.com/
+
+qwen:
+  type: reference
+  title: "Qwen — Alibaba Cloud"
+  author:
+    - Alibaba Cloud
+  date: 2025
+  url: https://qwen.ai/home
+
+dotnet:
+  type: reference
+  title: "Microsoft .NET"
+  author:
+    - Microsoft
+  date: 2025
+  url: https://dotnet.microsoft.com/it-it/
+
+visual-studio:
+  type: reference
+  title: "Visual Studio"
+  author:
+    - Microsoft
+  date: 2026
+  url: https://visualstudio.microsoft.com/it/vs/
+
+git:
+  type: reference
+  title: "Git — distributed version control system"
+  author:
+    - Torvalds, Linus
+  date: 2005
+  url: https://git-scm.com/
+
+omega-gruppo:
+  type: reference
+  title: Omega Gruppo
+  author:
+    - Omega S.r.l.
+  date: 2025
+  url: https://www.omegagruppo.it/
+
+anthropic:
+  type: reference
+  title: Anthropic
+  author:
+    - Anthropic
+  date: 2025
+  url: https://www.anthropic.com/
+
+openai:
+  type: reference
+  title: OpenAI
+  author:
+    - OpenAI
+  date: 2025
+  url: https://openai.com/

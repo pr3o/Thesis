@@ -1,38 +1,49 @@
+```
 > [!NOTE]
-> 🇦🇺 English localization is currently only supported via [constants.typ](https://github.com/tlazzarin/thesis-template/blob/main/config/constants.typ) as the documentation is written in Italian. Please use machine translation or read the code 🙂.
-# 🇮🇹 Introduzione
-Questa repository contiene un template Typst per la tesi di laurea all'Università di Padova. Pur avendo un forte bias per il corso di Scienze Informatiche (report di un progetto di stage) rimane adattabile per gli altri CdL.\
-Il template è basato su [questo template](https://github.com/eliapasquali/typst-thesis-template) e ampiamente modificato per scrivere la
-[mia tesi](https://hdl.handle.net/20.500.12608/89992).
+> 🇮🇹 Questa repository contiene la **tesi di laurea finale** di Leonardo Preo, sviluppata con Typst.
 
-> [!TIP]
-> Se preferisci usare un servizio simile a Overleaf scarica lo zip di questa repository e caricarlo su [Typst Web](https://typst.app/signin/).
+# 📚 Titolo della tesi
+**“Intelligenza Artificiale Generativa per la Programmazione Assistita: un approccio basato su Modelli di Contesto”**
 
-Per compilare la tesi secondo gli standard universitari:
+# ✍️ Autore e relatore
+- **Autore:** Leonardo Preo
+- **Relatore:** Prof. Francesco Ranzato
+- **Azienda di stage:** Omega S.r.l.
+
+# 🗂️ Ambito e descrizione
+La tesi affronta l’utilizzo di grandi modelli di lingua (LLM) per assistere lo sviluppo software, con focus su:
+- integrazione di modelli di contesto (Model Context Protocol) nei workflow di programmazione;
+- valutazione di framework come **Semantic Kernel**, **LangChain** e **Qwen**;
+- progettazione di interfacce che permettono al programmatore di sfruttare le capacità generative per completare, refactoring e documentare codice;
+- analisi di performance e conformità a standard accademici (PDF/A‑3B).
+
+Il lavoro è strutturato in capitoli teorici, studio di casi reali (progetti svolti in Omega S.r.l.) e un prototipo funzionale.
+
+# 📁 Struttura del repository
+```
+📦 thesis-template/
+├─ 📂 appendix/          # Appendici e materiale supplementare
+│   └─ 📂 bibliography/   # Bibliografia in YAML
+├─ 📂 config/            # Variabili e costanti di configurazione
+├─ 📂 docs/              # Documenti di esempio e guide
+├─ 📂 src/               # Codice Typst della tesi (capitoli .typ)
+│   ├─ 1_introduzione.typ
+│   ├─ 2_stato-arte.typ
+│   ├─ 3_metodologia.typ
+│   ├─ 4_risultati.typ
+│   ├─ 5_conclusioni.typ
+│   └─ thesis.typ        # Entry point per la compilazione
+├─ .github/workflows/    # GitHub Actions per CI/CD
+└─ 📄 README.md          # Questo file
+```
+
+# 🛠️ Compilazione
+Genera il PDF conforme a PDF/A‑3B:
 ```sh
 typst c thesis.typ --pdf-standard a-3b
 ```
-Altrimenti puoi abilitare la watch mode che ricompila il PDF ad ogni modifica:
+Attiva la **watch mode** per ricompilare ad ogni salvataggio:
 ```sh
 typst w thesis.typ
 ```
-Se cerchi un lettore PDF che supporti l'hot reloading ti consiglio [Zathura](https://pwmt.org/projects/zathura/). 
-## Features
-- ✅ Bibliografia
-- ✅ Continuous integration e pubblicazione su GitHub Pages (vedi [esempi.typ](https://github.com/tlazzarin/thesis-template/blob/main/docs/esempi.typ))
-- ✅ Glossario
-- ✅ Gestione avanzata dei requisiti
-- ✅ Supporto PDF/A
-- ⏳ Appendici (implementabile)
-
-# Guida
-La primissima cosa che ti consiglio di fare è modificare il file [variables.typ](https://github.com/tlazzarin/thesis-template/blob/main/config/variables.typ) inserendo le tue informazioni.\
-Nel file [esempi.typ](https://github.com/tlazzarin/thesis-template/blob/main/docs/esempi.typ), incluso di default nel template, ci sono degli esempi di come fare alcune cose.
-
-
-# Riferimenti
-- Template su cui mi sono basato: https://github.com/eliapasquali/typst-thesis-template
-- Typst docs: https://typst.app/docs/
-- Glossarium: https://typst.app/universe/package/glossarium
-- Codly: https://typst.app/universe/package/codly
-- Bibliography: https://typst.app/docs/reference/model/bibliography
+```

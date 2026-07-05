@@ -1,4 +1,4 @@
-```
+
 > [!NOTE]
 > 🇮🇹 Questa repository contiene la **tesi di laurea finale** di Leonardo Preo, sviluppata con Typst.
 
@@ -45,5 +45,4 @@ typst c thesis.typ --pdf-standard a-3b
 Attiva la **watch mode** per ricompilare ad ogni salvataggio:
 ```sh
 typst w thesis.typ
-```
 ```

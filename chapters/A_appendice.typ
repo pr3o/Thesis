@@ -179,6 +179,7 @@ Ad ogni requisito è associato un codice costruito in base alle sue caratteristi
 #v(1em)
 #align(center)[*(F/Q/C)(M/D/O)R*]
 #v(1em)
+#[
 #set list(marker: none)
 - F (_Functional_): definisce una funzione di un sistema o dei suoi componenti;
 - Q (_Qualitative_): rappresentano come il sistema deve essere per soddisfare i requisiti dello stakeholder;
@@ -190,7 +191,18 @@ Ad ogni requisito è associato un codice costruito in base alle sue caratteristi
 #v(0.3em)
 - R (_Requirement_): requisito
 #v(1em)
+]
 In @tab:requisiti-funzionali, @tab:requisiti-qualitativi e @tab:requisiti-vincolo sono riassunti i requisiti e il loro tracciamento con gli use case delineati in fase di analisi.
+
+La colonna "Fonti" indica da quale artefatto il requisito è stato derivato:
+
+- US (User Story): requisiti funzionali estratti dalle user story raccolte durante l'analisi
+
+- Piano di lavoro: requisiti non funzionali e di qualità definiti nel documento di project management
+
+- Riunione col tutor: vincoli tecnici e architetturali emersi dalle riunioni di supervisione
+
+Un requisito può avere più fonti, indicando che più stakeholder convergevano sulla stessa esigenza.
 #[
 #show figure: set block(breakable: true)
 #set table(

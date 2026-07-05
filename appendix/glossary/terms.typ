@@ -94,5 +94,35 @@
     short: [SDK],
     long: [Software Development Kit],
     description: [Pacchetto di strumenti di sviluppo che fornisce a programmatori e sviluppatori librerie, interfacce (API), documentazione e strumenti di debug necessari per creare applicazioni su una specifica piattaforma, semplificando e accelerando il processo di scrittura del codice.]
+  ),
+  (
+    key: "memento",
+    short: [Memento],
+    long: [],
+    description: [_Pattern_ comportamentale che cattura e esternalizza lo stato interno di un oggetto senza violare l'incapsulamento, permettendone il ripristino successivo.]
+  ),
+  (
+    key: "bearer",
+    short: [Bearer Token],
+    long: [],
+    description: [_Token_ di autenticazione HTTP trasportato nell'_header Authorization_ con il prefisso `Bearer `, utilizzato per identificare l'utente nelle richieste REST.]
+  ),
+  (
+    key: "sentinel",
+    short: [Sentinel Value],
+    long: [],
+    description: [Valore speciale usato come segnale o marcatore per comunicare una condizione speciale (es: `__AUTH_EXPIRED` per indicare che il _token_ JWT è scaduto).]
+  ),
+  (
+    key: "sse",
+    short: [SSE],
+    long: [Server Sent Events],
+    description: [Protocollo di comunicazione _one-way_ dal _server_ al _client_ basato su HTTP, utilizzato per lo _streaming_ di dati in tempo reale.]
+  ),
+  (
+    key: "quantizzazione",
+    short: [Quantizzazione],
+    long: [],
+    description: [Tecnica di compressione che riduce la precisione numerica dei pesi di una rete neurale (es: da `float32` a `int8`), riducendo memoria e latenza a costo di leggera perdita di accuratezza.]
   )
 )

@@ -32,8 +32,8 @@ C\# è un linguaggio orientato agli oggetti, fortemente tipizzato e multi-paradi
 Visual Basic .NET è un linguaggio orientato agli oggetti che, al pari di C\#, viene compilato per la piattaforma .NET. Nel progetto è stato impiegato per il modulo di interfaccia integrato nel gestionale. La scelta non è stata discrezionale, ma dettata da un vincolo di omogeneità: il modulo di pianificazione del reparto _Delivery_ in cui il chatbot si innesta è interamente scritto in Visual Basic .NET, e l'integrazione richiede di operare direttamente sugli oggetti dell'interfaccia esistente --- leggere lo stato del pianificatore, applicare in anteprima le proposte e agganciarsi al flusso di salvataggio --- attività che impongono di sviluppare nello stesso linguaggio e nello stesso processo del modulo ospitante.
 
 == Microsoft Semantic Kernel
-Semantic Kernel è il framework di orchestrazione LLM utilizzato nel client. Fornisce l'astrazione del _Kernel_ (host del modello e dei plugin), il _function calling_ automatico --- è il framework a decidere e auto-invocare i tool in base al ragionamento del modello --- e una catena di filtri che permette di intercettare ogni invocazione di strumento.\
-Quest'ultimo meccanismo è stato sfruttato per l'anti-loop, l'osservabilità e il rinnovo del token. I tool MCP esposti dal server vengono mappati in funzioni del _kernel_ e resi invocabili dal modello.
+Semantic Kernel è il framework di orchestrazione LLM utilizzato nel client. Fornisce l'astrazione del _Kernel_ (host del modello e dei plugin), il _function calling_ automatico --- è il framework a decidere e auto-invocare i _tool_ in base al ragionamento del modello --- e una catena di filtri che permette di intercettare ogni invocazione di strumento.\
+Quest'ultimo meccanismo è stato sfruttato per l'anti-loop, l'osservabilità e il rinnovo del token. I _tool_ MCP esposti dal server vengono mappati in funzioni del _kernel_ e resi invocabili dal modello.
 
 == SDK del Model Context Protocol
 #figure(
@@ -48,7 +48,7 @@ Dal punto di vista implementativo, l'SDK fornisce tutti i blocchi costitutivi pe
 == Endpoint LLM e Ollama
 #figure(
     caption: [Logo di Ollama.],
-    image("../images/Ollama-logo.png", alt: "Logo Ollama", width: 30%)
+    image("../images/Ollama-logo.png", alt: "Logo Ollama", width: 25%)
 )
 L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato su un server aziendale con runtime di tipo #linkfn("https://ollama.com/")[Ollama]. Ollama è uno strumento _open source_ che facilita l'esecuzione, la gestione e il _deployment_ di LLM in ambienti locali: a differenza delle soluzioni _cloud_, consente di eseguire i modelli direttamente sull'infrastruttura ospite, garantendo privacy dei dati e assenza di latenza verso API di terze parti, e offre un'interfaccia conforme allo standard delle API OpenAI#footnote[Società di ricerca e sviluppo che fornisce API per modelli linguistici generativi.]. Questa compatibilità ha permesso di interrogare il modello tramite librerie client standard, mantenendo il sistema indipendente dallo specifico motore di inferenza. L'esecuzione in locale è resa praticabile dalla _quantizzazione_, tecnica che riduce la precisione numerica dei pesi della rete abbassandone i requisiti di memoria e di calcolo.
 
@@ -57,7 +57,7 @@ L'inferenza è delegata a un endpoint LLM remoto _OpenAI-compatibile_, ospitato 
     image("../images/Qwen_Logo.png", alt: "Logo Qwen", width: 60%)
 )
 
-Per il motore di inferenza è stato adottato un modello della famiglia #linkfn("https://qwen.ai/home")[*Qwen*], scelta motivata dalle sue spiccate capacità di ragionamento logico.
+Per il motore di inferenza è stato adottato un modello della famiglia #linkfn("https://qwen.ai/home")[*Qwen*], sviluppata da Alibaba Cloud. Qwen è una famiglia di _Large Language Model_ _open-source_ con spiccate capacità di ragionamento logico-deduttivo e comprensione multilingue, italiano compreso. La famiglia offre un supporto nativo alla catena di ragionamento esplicita (_thinking chain_): il modello può separare il proprio monologo interno (visibile all'operatore come canale di trasparenza) dalla risposta destinata all'utente, abilitando questo comportamento tramite un semplice _flag_ `think` nel _payload_ della richiesta HTTP. Qwen è disponibile in diverse taglie; per questo progetto sono state valutate la variante a 9 miliardi di parametri (9B) e quella a 27 miliardi (27B), entrambe in versione quantizzata per ridurre i requisiti hardware.
 Le dinamiche che hanno guidato la selezione della versione e taglia dello specifico modello sono descritte nella @sez:scelta-modello.
 
 

@@ -67,6 +67,10 @@
   // Glossary bootstrap and setup
   show: make-glossary
   register-glossary(glossary-terms)
+
+  show ref: set text(fill: rgb(155, 0, 20))
+  show link: set text(fill: rgb(155, 0, 20))
+  
   body
 }
 
@@ -114,5 +118,5 @@
 
 // Utile per quando si introducono le tecnologie (link+corsivo+footnote)
 #let linkfn(url, body) = (
-  link(url, text(style: "italic", body))+footnote(link(url))
+  link(url, text(style: "italic", rgb(155, 0, 20), body))+footnote(link(url))
 )

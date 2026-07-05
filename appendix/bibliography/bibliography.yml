@@ -102,3 +102,46 @@ openai:
     - OpenAI
   date: 2025
   url: https://openai.com/
+
+refactoring-guru:
+  type: reference
+  title: "Refactoring.Guru — Design Patterns"
+  author:
+    - Shvets, Alexander
+  date: 2025
+  url: https://refactoring.guru/
+
+jsonrpc-spec:
+  type: reference
+  title: "JSON-RPC 2.0 Specification"
+  author:
+    - JSON-RPC Working Group
+  date: 2010
+  url: https://www.jsonrpc.org/specification
+
+json-schema:
+  type: reference
+  title: "JSON Schema"
+  author:
+    - JSON Schema Community
+  date: 2025
+  url: https://json-schema.org/
+
+jwt-rfc:
+  type: reference
+  title: "JSON Web Token (JWT) — RFC 7519"
+  author:
+    - Jones, Michael B.
+    - Bradley, John
+    - Sakimura, Nat
+  date: 2015
+  url: https://datatracker.ietf.org/doc/html/rfc7519
+
+mcp-csharp-sdk:
+  type: reference
+  title: "Model Context Protocol — C# SDK"
+  author:
+    - Anthropic
+    - Microsoft
+  date: 2025
+  url: https://github.com/modelcontextprotocol/csharp-sdk

@@ -1,43 +1,44 @@
 
-> [!NOTE]
-> 🇮🇹 Questa repository contiene la **tesi di laurea finale** di Leonardo Preo, sviluppata con Typst.
+# Tesi di Laurea in Informatica - Università degli Studi di Padova
 
-# 📚 Titolo della tesi
-**“Intelligenza Artificiale Generativa per la Programmazione Assistita: un approccio basato su Modelli di Contesto”**
+**Titolo:** Sviluppo di un chatbot basato su Model Context Protocol per il supporto alla pianificazione delle attività aziendali  
+**Candidato:** Leonardo Preo  
+**Azienda Ospitante:** Omega Gruppo 
 
-# ✍️ Autore e relatore
-- **Autore:** Leonardo Preo
-- **Relatore:** Prof. Francesco Ranzato
-- **Azienda di stage:** Omega S.r.l.
+## Descrizione del Progetto
+Questo repository contiene il codice sorgente del documento di tesi, redatto interamente in Typst. 
+Il lavoro illustra la progettazione e l'implementazione di un assistente virtuale integrato nell'ecosistema aziendale, progettato per supportare gli utenti nella pianificazione delle attività. Il cuore del sistema sfrutta i Large Language Models (LLM) e il **Model Context Protocol (MCP)**, permettendo all'intelligenza artificiale di interagire in modo sicuro, deterministico e contestualizzato con le API aziendali (come Symposium e Agilis), mitigando attattivamente il rischio di allucinazioni tramite delega deterministica e interazione "human-in-the-loop".
 
-# 🗂️ Ambito e descrizione
-La tesi affronta l’utilizzo di grandi modelli di lingua (LLM) per assistere lo sviluppo software, con focus su:
-- integrazione di modelli di contesto (Model Context Protocol) nei workflow di programmazione;
-- valutazione di framework come **Semantic Kernel**, **LangChain** e **Qwen**;
-- progettazione di interfacce che permettono al programmatore di sfruttare le capacità generative per completare, refactoring e documentare codice;
-- analisi di performance e conformità a standard accademici (PDF/A‑3B).
+## Struttura del Documento
+La tesi è organizzata nei seguenti capitoli:
 
-Il lavoro è strutturato in capitoli teorici, studio di casi reali (progetti svolti in Omega S.r.l.) e un prototipo funzionale.
+1. **Introduzione**: Contesto aziendale, definizione del problema e obiettivi del progetto.
+2. **Stato dell'Arte**: Evoluzione degli LLM, paradigma del Tool Use (Function Calling) e introduzione architetturale al Model Context Protocol.
+3. **Analisi dei requisiti**: Analisi degli utenti, formulazione delle user stories ed estrazione dei macro-requisiti.
+4. **Tecnologie utilizzate**: Panoramica su .NET, C#, Microsoft Semantic Kernel, SDK MCP e motori LLM (Ollama).
+5. **Progettazione**: Architettura di distribuzione a tre nodi, ciclo di vita dei token, flussi end-to-end e pattern architetturali adottati per garantire isolamento e sicurezza.
+6. **Implementazione**: Sviluppo effettivo del Server MCP, orchestrazione lato Client, catena di filtri e integrazione del modulo chatbot nell'interfaccia utente.
+7. **Conclusioni**: Consuntivo finale sul raggiungimento degli obiettivi, rischi mitigati e possibili sviluppi futuri.
+- **Appendici**: Elenco completo delle user stories, tracciamento dei requisiti, listati di codice essenziali e Glossario.
 
-# 📁 Struttura del repository
-```
-📦 thesis-template/
-├─ 📂 appendix/          # Appendici e materiale supplementare
-│   └─ 📂 bibliography/   # Bibliografia in YAML
-├─ 📂 config/            # Variabili e costanti di configurazione
-├─ 📂 docs/              # Documenti di esempio e guide
-├─ 📂 src/               # Codice Typst della tesi (capitoli .typ)
-│   ├─ 1_introduzione.typ
-│   ├─ 2_stato-arte.typ
-│   ├─ 3_metodologia.typ
-│   ├─ 4_risultati.typ
-│   ├─ 5_conclusioni.typ
-│   └─ thesis.typ        # Entry point per la compilazione
-├─ .github/workflows/    # GitHub Actions per CI/CD
-└─ 📄 README.md          # Questo file
-```
+## Tecnologie del Progetto Software
+- **Core & Orchestrazione**: C#, .NET, Microsoft Semantic Kernel
+- **Protocolli**: Model Context Protocol (MCP)
+- **Modelli AI**: Ollama / G LLM
+- **Typesetting Tesi**: Typst
 
-# 🛠️ Compilazione
+---
+
+## Compilazione del Documento (Typst)
+
+Questo documento utilizza [Typst](https://typst.app/) per la composizione tipografica. 
+
+### Prerequisiti
+Assicurati di aver installato la CLI di Typst sul tuo sistema. 
+
+### Comandi di compilazione
+Eseguire questi comandi nella root del progetto.
+
 Genera il PDF conforme a PDF/A‑3B:
 ```sh
 typst c thesis.typ --pdf-standard a-3b

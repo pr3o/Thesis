@@ -1,3 +1,4 @@
 *.pdf
 start.sh
 TODO.md
+.DS_Store

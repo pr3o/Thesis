@@ -40,7 +40,7 @@ Quest'ultimo meccanismo è stato sfruttato per l'anti-loop, l'osservabilità e i
     caption: [Logo di MCP.],
     image("../images/mcp-logo.png", alt: "Logo MCP", width: 30%)
 )
-L'integrazione del protocollo MCP, descritto concettualmente nella @cap:stato-arte, è stata realizzata avvalendosi del relativo SDK per .NET.
+L'integrazione del protocollo MCP, descritto concettualmente nella @cap:stato-arte, è stata realizzata avvalendosi del relativo SDK per .NET @mcp-csharp-sdk.
 Questa libreria costituisce la dipendenza fondamentale che ha imposto l'uso di .NET 10 per i nuovi componenti del sistema, essendone un requisito tecnico imprescindibile.
 Dal punto di vista implementativo, l'SDK fornisce tutti i blocchi costitutivi per l'architettura: per il lato server, semplifica l'esposizione delle funzionalità aziendali e gestisce la comunicazione bidirezionale tramite i canali standard di _input/output_; per il lato client, offre meccanismi per interrogare il server, mappare a _runtime_ gli strumenti esposti e tradurli in interfacce comprensibili per il modello linguistico.
 
@@ -73,7 +73,7 @@ L'intero ciclo di produzione del software è stato orchestrato tramite #linkfn("
     caption: [Logo di Git.],
     image("../images/Git-logo.png", alt: "Logo Git", width: 40%)
 )
-#linkfn("https://git-scm.com/")[Git] è un sistema di versionamento distribuito, sviluppato da Linus Torvalds nel 2005, che permette di tracciare le modifiche al codice sorgente e di collaborare in modo efficiente. I suoi elementi principali sono la _working directory_, la _staging area_, i _commit_ (istantanee immutabili dello stato del progetto), i _branch_ (linee di sviluppo parallele) e i _repository_ locale e remoto, riconciliati tramite l'operazione di _merge_. In Omega le funzionalità di Git vengono utilizzate prevalentemente attraverso l'area di versionamento integrata in Visual Studio (@fig:vs-git).
+#linkfn("https://git-scm.com/")[Git] @git è un sistema di versionamento distribuito, sviluppato da Linus Torvalds nel 2005, che permette di tracciare le modifiche al codice sorgente e di collaborare in modo efficiente. I suoi elementi principali sono la _working directory_, la _staging area_, i _commit_ (istantanee immutabili dello stato del progetto), i _branch_ (linee di sviluppo parallele) e i _repository_ locale e remoto, riconciliati tramite l'operazione di _merge_. In Omega le funzionalità di Git vengono utilizzate prevalentemente attraverso l'area di versionamento integrata in Visual Studio (@fig:vs-git).
 
 #figure(
     caption: [Sezione Visual Studio 2026 dedicata a versionamento.],

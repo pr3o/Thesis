@@ -1,9 +1,9 @@
 #import "../config/variables.typ" : *
-#import "../config/constants.typ" : acknlowledgements
+#import "../config/constants.typ" : acknowledgements
 
 #pagebreak(to: "odd")
 #v(10em)
-#text(24pt, weight: "semibold", acknlowledgements)
+#text(24pt, weight: "semibold", acknowledgements)
 #v(3em)
 #text(style:"italic")[
 Desidero esprimere la mia profonda gratitudine al Prof. #myProf, relatore di questa tesi, per la guida, i preziosi consigli e la completa disponibilità dimostrati durante l'intero percorso di stesura.

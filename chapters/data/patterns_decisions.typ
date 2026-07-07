@@ -10,17 +10,17 @@
 
   P.push(([Proxy remoto / Bridge], [Orchestratore lato VB], [Proxy verso l'orchestratore C\# che vive in un altro processo; DTO speculari sul _wire_.]))
 
-  P.push(([Chain of Responsibility], [Filtri di auto-invocazione], [Intercetta ogni invocazione di _tool_ per anti-loop, osservabilità e _refresh_ del token.]))
+  P.push(([Chain of Responsibility], [Filtri di auto-invocazione], [Intercetta ogni invocazione di tool per anti-loop, osservabilità e _refresh_ del _token_.]))
 
-  P.push(([Producer / Consumer], [Filtro di cattura verso coda concorrente], [Sincronizza la cattura dei _tool_ con lo _streaming_ del testo.]))
+  P.push(([Producer / Consumer], [Filtro di cattura verso coda concorrente], [Sincronizza la cattura dei tool con lo _streaming_ del testo.]))
 
   P.push(([State Machine], [_Stripper_ dello _streaming_], [Ripulisce e smista lo _stream_ di _chunk_, gestendo i marcatori spezzati a cavallo di due _chunk_.]))
 
-  P.push(([Sentinel value], [`__AUTH_EXPIRED`], [Segnala il token scaduto attraverso un confine che trasporta solo stringhe.]))
+  P.push(([Sentinel value], [`__AUTH_EXPIRED`], [Segnala il _token_ scaduto attraverso un confine che trasporta solo stringhe.]))
 
   P.push(([Memento], [_Snapshot_ pre-modifica], [Consente il _rollback_ dell'anteprima allo stato precedente.]))
 
-  P.push(([Singleton mutabile thread-safe], [Provider del token], [Unico punto di verità del _bearer_ corrente nel server MCP, aggiornabile a runtime.]))
+  P.push(([Singleton mutabile thread-safe], [Provider del _token_], [Unico punto di verità del _bearer_ corrente nel server MCP, aggiornabile a runtime.]))
 
   return P
 }
@@ -39,15 +39,15 @@
 
   D.push(([_Streaming_ a canali separati], [UX reattiva; ragionamento su canale dedicato e blocco JSON nascosto.], [Risposta unica a fine elaborazione: attesa lunga e output non pulito.]))
 
-  D.push(([_Refresh_ del token a più livelli], [Robustezza alla scadenza del JWT senza interrompere la conversazione.], [Singolo controllo all'avvio: il token scadrebbe a metà sessione.]))
+  D.push(([_Refresh_ del _token_ a più livelli], [Robustezza alla scadenza del JWT senza interrompere la conversazione.], [Singolo controllo all'avvio: il _token_ scadrebbe a metà sessione.]))
 
   D.push(([Costruzione _lazy_ dell' orchestratore], [Apertura del pannello immediata e UI sempre reattiva.], [Costruzione sincrona: _deadlock_ e blocco dell'interfaccia.]))
 
-  D.push(([Contesto limitato alla _viewport_], [Evita di far ragionare il modello su record fuori vista.], [Invio dell'intero dataset: costo di token e rumore informativo.]))
+  D.push(([Contesto limitato alla _viewport_], [Evita di far ragionare il modello su record fuori vista.], [Invio dell'intero dataset: costo di _token_ e rumore informativo.]))
 
-  D.push(([Validazione delle proposte esterna al modello], [Un _tool_ deterministico verifica le sovrapposizioni e scarta a monte le proposte invalide; il modello resta libero dalla verifica di consistenza.], [Estrazione da un blocco JSON libero generato dal modello: fragile col modello leggero, frequenti incoerenze.]))
+  D.push(([Validazione delle proposte esterna al modello], [Un tool deterministico verifica le sovrapposizioni e scarta a monte le proposte invalide; il modello resta libero dalla verifica di consistenza.], [Estrazione da un blocco JSON libero generato dal modello: fragile col modello leggero, frequenti incoerenze.]))
 
-  D.push(([_Tool_ deterministici ad alta granularità], [Incapsulano sequenze complesse (es. calcolo disponibilità) e restituiscono risultati finiti, riducendo i passi di ragionamento.], [_Tool_ elementari composti dal modello: ogni composizione è un passo in più e un'occasione di allucinazione.]))
+  D.push(([Tool deterministici ad alta granularità], [Incapsulano sequenze complesse (es. calcolo disponibilità) e restituiscono risultati finiti, riducendo i passi di ragionamento.], [Tool elementari composti dal modello: ogni composizione è un passo in più e un'occasione di allucinazione.]))
 
   return D
 }

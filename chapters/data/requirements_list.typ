@@ -125,7 +125,7 @@
   FR.push(((m + str(mandatory)), [Il sistema deve mantenere il contesto della conversazione corrente e tenerne conto nelle risposte successive.], [@us:follow-up]))
 
   mandatory +=1
-  FR.push(((m + str(mandatory)), [Il sistema deve mettere a disposizione del chatbot una base di conoscenza interna (istruzioni operative e FAQ sull'utilizzo del gestionale) consultabile durante l'elaborazione, affinchè possa interpretare correttamente i dati ed eseguire le operazioni richieste.], [Piano di lavoro.]))
+  FR.push(((m + str(mandatory)), [Il sistema deve mettere a disposizione del chatbot una base di conoscenza interna (istruzioni operative e FAQ sull'utilizzo del gestionale) consultabile durante l'elaborazione, affinché possa interpretare correttamente i dati ed eseguire le operazioni richieste.], [Piano di lavoro.]))
   
   if getLen == true {
     return (mandatory, desirable, optional)

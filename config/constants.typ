@@ -20,9 +20,9 @@
   "en" : "Abstract",
 ).at(myLang)
 
-#let acknlowledgements = (
+#let acknowledgements = (
   "it" : "Ringraziamenti",
-  "en" : "Acknlowledgements",
+  "en" : "Acknowledgements",
 ).at(myLang)
 
 #let figuresList = (
@@ -38,7 +38,7 @@
 #let sourceCodeList = (
   // Eventualmente rinominabile in "Elenco dei listati"/"Listings" ?
   "it" : "Elenco dei Codici Sorgente",
-  "en" : "List of Code Snipptes"
+  "en" : "List of Code Snippets"
 ).at(myLang)
 
 #let chapter = (

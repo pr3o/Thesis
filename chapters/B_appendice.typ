@@ -1,6 +1,6 @@
 #import "../config/thesis-config.typ": glpl, gl
 #import "data/requirements_list.typ": *
-#import "data/implemetations.typ": *
+#import "data/implementations.typ": *
 
 #pagebreak(to:"odd")
 = Listati di codice <cap:B-appendice>
@@ -15,7 +15,7 @@ La colonna _Esposto_ indica se l'_endpoint_ è reso invocabile dal modello (✔)
     table.header([*Metodo*], [*Rotta*], [*Esposto*], [*Descrizione*]),
     ..getEndpoints().flatten()
   ),
-  caption: [Lista degli _endpoint_ esposti da Symposium per il _server_ MCP.],
+  caption: [Lista degli _endpoint_ esposti da Symposium per il server MCP.],
 )<tab:endpoints>
 
 == Mappa degli strumenti esposti al modello
@@ -27,7 +27,7 @@ Di seguito la mappa completa degli strumenti a disposizione del modello linguist
     table.header([*Tool*], [*Tipo*], [*Fonte*]),
     ..getTools().flatten()
   ),
-  caption: [Mappa _tool_ MCP esposti --> fonti dati.],
+  caption: [Mappa tool MCP esposti --> fonti dati.],
 )<tab:tools>
 
 == Estratti di codice
@@ -46,7 +46,7 @@ Di seguito la mappa completa degli strumenti a disposizione del modello linguist
       Sub Shutdown()
   End Interface
 
-  ' Estrazione del contesto dal ViewModel di XSPMPRIS. Implementato da XspmprisContextAdapter.
+  ' Estrazione del contesto dal _ViewModel_ di XSPMPRIS. Implementato da XspmprisContextAdapter.
   Public Interface IPlanningContextProvider
       Function BuildContext() As ChatContext
       Function ResolveAppuntamento(progr As Integer) As AppuntamentoSnapshot
@@ -98,7 +98,7 @@ Di seguito la mappa completa degli strumenti a disposizione del modello linguist
   ```
 
   #figure(
-    caption: [Esempio di _tool_ MCP che mappa l'_endpoint_ `mcp/Appuntamenti` del _plugin_ REST di Symposium.],
+    caption: [Esempio di tool MCP che mappa l'_endpoint_ `mcp/Appuntamenti` del _plugin_ REST di Symposium.],
     ```cs
     [McpServerTool]
     [Description("Cerca appuntamenti del pianificatore. Restituisce titolo, date inizio/fine, luogo, stato, commessa, taskid, risorse assegnate, note interne, note cliente. Filtri: codRisorsa (og_progr), dataDa, dataA, codStato, conto, codLead, commessa, taskId. Possibilità di paginazione attraverso skip e take.")]
@@ -120,7 +120,7 @@ Di seguito la mappa completa degli strumenti a disposizione del modello linguist
         ```
 )<cod:mcp-tool-example>
 
-#figure(caption: [Il filtro anti-loop: termina l'esecuzione al superamento del numero massimo di round di _tool_.])[
+#figure(caption: [Il filtro anti-loop: termina l'esecuzione al superamento del numero massimo di round di tool.])[
 ```cs
 sealed class MaxToolRoundsFilter(int maxRounds) : IAutoFunctionInvocationFilter
 {
@@ -138,7 +138,7 @@ sealed class MaxToolRoundsFilter(int maxRounds) : IAutoFunctionInvocationFilter
 }
 ```]<cod:max-tool-rounds>
 
-#figure(caption: [Il filtro di osservabilità: intercetta ogni invocazione di _tool_ e ne accoda nome, parametri ed esito in una `ConcurrentQueue` a disposizione dell'interfaccia.])[
+#figure(caption: [Il filtro di osservabilità: intercetta ogni invocazione di tool e ne accoda nome, parametri ed esito in una `ConcurrentQueue` a disposizione dell'interfaccia.])[
 ```cs
 public sealed record ToolCallRecord(string Nome, string ParametriJson, string? Risultato);
 
@@ -256,7 +256,7 @@ public async Task AuthenticateIfNecessary()
 ```]<cod:auth-margin>
 
 
-  #figure(caption: [Traduzione del 401 in un _sentinel_ lato _server_ MCP.])[
+  #figure(caption: [Traduzione del 401 in un _sentinel_ lato server MCP.])[
 ```cs
 public static string FormatResponse(RestResponseWithData<byte[]> resp)
 {

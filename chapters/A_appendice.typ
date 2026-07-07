@@ -5,11 +5,6 @@
 #pagebreak(to:"odd")
 = Requisiti completi e decisioni di progetto<cap:A-appendice>
 
-#text(style: "italic", [
-    Questa appendice raccoglie il materiale di dettaglio richiamato dai capitoli 3 e 5 e tenuto fuori dal corpo per non appesantirlo, come indicato dal relatore.
-])
-#v(1em)
-
 == Lista delle user stories<cap:lista-user-stories>
 #[
 #set heading(
@@ -215,7 +210,7 @@ Un requisito può avere più fonti, indicando che più stakeholder convergevano 
         table.header([*Codice*], [*Descrizione*], [*Fonti*]),
         ..getFR().flatten()
     ),
-    caption: "Tracciamento dei requisti funzionali.",
+    caption: "Tracciamento dei requisiti funzionali.",
 )
 <tab:requisiti-funzionali>
 
@@ -226,7 +221,7 @@ Un requisito può avere più fonti, indicando che più stakeholder convergevano 
       table.header([*Codice*], [*Descrizione*], [*Fonti*]),
       ..getQR().flatten()
     ),
-    caption: "Tracciamento dei requisti di qualità.",
+    caption: "Tracciamento dei requisiti di qualità.",
 )
 <tab:requisiti-qualitativi>
 
@@ -237,7 +232,7 @@ Un requisito può avere più fonti, indicando che più stakeholder convergevano 
       table.header([*Codice*], [*Descrizione*], [*Fonti*]),
       ..getCR().flatten()
     ),
-    caption: "Tracciamento dei requisti di vincolo.",
+    caption: "Tracciamento dei requisiti di vincolo.",
 )
 <tab:requisiti-vincolo>
 

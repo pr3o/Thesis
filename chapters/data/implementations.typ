@@ -86,7 +86,7 @@
 
   T.push(([`SetSymposiumToken`], [_control-plane_], [interno, non esposto al modello]))
 
-  T.push((table.cell(colspan: 3, [*Plugin Semantic Kernel*]),))
+  T.push((table.cell(colspan: 3, [*_Plugin_ Semantic Kernel*]),))
 
   T.push(([`pianifica_e_proponi`], [validazione], [`PianificaPlugin`]))
 

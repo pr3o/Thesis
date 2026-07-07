@@ -21,7 +21,7 @@
     key: "backend",
     short: [Backend],
     long: [],
-    description: [Il "dietro le quinte" di un'applicazione web. Gestisce la logica di funzionamento, l'elaborazione dei dati e la comunicazione con il _database_ e altri servizi, rimanendo di fatto invisibile all'utente finale.]
+    description: [Il "dietro le quinte" di un'applicazione web. Gestisce la logica di funzionamento, l'elaborazione dei dati e la comunicazione con il database e altri servizi, rimanendo di fatto invisibile all'utente finale.]
   ),
   (
     key: "bearer",
@@ -39,7 +39,7 @@
     key: "client",
     short: [Client],
     long: [],
-    description: [Dispositivo o programma (come un browser web o l'interfaccia utente di un'app) che richiede servizi, dati o risorse a un altro computer (chiamato _server_) all'interno di una rete.]
+    description: [Dispositivo o programma (come un browser web o l'interfaccia utente di un'app) che richiede servizi, dati o risorse a un altro computer (chiamato server) all'interno di una rete.]
   ),
   (
     key: "database",
@@ -171,19 +171,19 @@
     key: "server",
     short: [Server],
     long: [],
-    description: [Computer o sistema informatico potente che fornisce dati, servizi o risorse ad altri computer (i _client_) attraverso una rete. Nel contesto web, elabora le richieste degli utenti e ospita il cuore delle applicazioni.]
+    description: [Computer o sistema informatico potente che fornisce dati, servizi o risorse ad altri computer (i client) attraverso una rete. Nel contesto web, elabora le richieste degli utenti e ospita il cuore delle applicazioni.]
   ),
   (
     key: "sistemi-aumentati",
     short: [Sistemi Aumentati],
     long: [],
-    description: [Architetture di intelligenza artificiale in cui un modello linguistico non opera in isolamento, ma viene potenziato integrandolo con l'accesso a basi di dati, strumenti (_tool_) o interfacce di programmazione (API) esterne. Questo approccio permette all'LLM di superare i limiti della propria memoria interna e di recuperare informazioni aggiornate o private.]
+    description: [Architetture di intelligenza artificiale in cui un modello linguistico non opera in isolamento, ma viene potenziato integrandolo con l'accesso a basi di dati, strumenti (tool) o interfacce di programmazione (API) esterne. Questo approccio permette all'LLM di superare i limiti della propria memoria interna e di recuperare informazioni aggiornate o private.]
   ),
   (
     key: "sse",
     short: [SSE],
     long: [Server Sent Events],
-    description: [Protocollo di comunicazione _one-way_ dal _server_ al _client_ basato su HTTP, utilizzato per lo _streaming_ di dati in tempo reale.]
+    description: [Protocollo di comunicazione _one-way_ dal server al client basato su HTTP, utilizzato per lo _streaming_ di dati in tempo reale.]
   ),
   (
     key: "tool",
@@ -225,7 +225,7 @@
     key: "cloud",
     short: [Cloud],
     long: [Cloud Computing],
-    description: [L'erogazione di servizi informatici (come _server_, archiviazione dati o _software_) tramite Internet. Nel progetto, si contrappone all'esecuzione "in locale", dove invece i programmi (come l'LLM) girano direttamente sui computer fisici dell'azienda, garantendo maggiore privacy.]
+    description: [L'erogazione di servizi informatici (come server, archiviazione dati o _software_) tramite Internet. Nel progetto, si contrappone all'esecuzione "in locale", dove invece i programmi (come l'LLM) girano direttamente sui computer fisici dell'azienda, garantendo maggiore privacy.]
   ),
   (
     key: "endpoint",

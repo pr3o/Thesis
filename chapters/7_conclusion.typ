@@ -9,6 +9,15 @@
 #v(1em)
 == Consuntivo finale
 
+Al fine di garantire una maggiore trasparenza e un tracciamento più puntuale delle attività effettivamente svolte, in fase di consuntivazione (@fig:tabella-calcolo-ore) si è scelto di disaggregare due delle macro-fasi originariamente accorpate nel Piano di Lavoro (@fig:tabella-ore-preventivate). Nello specifico, la mappatura tra i due prospetti è la seguente:
+#v(1em)
+- La voce preventiva *Formazione iniziale e studio del sistema* rimane invariata nel consuntivo.
+- La voce preventiva *Analisi requisiti e progettazione* è stata esplosa in due fasi distinte: *Analisi dei requisiti* e *Progettazione del sistema*.
+- La voce preventiva *Sviluppo del chatbot e integrazione con il pianificatore* rimane invariata nel consuntivo.
+- La voce preventiva *Test funzionali e miglioramento del sistema* è stata esplosa in due fasi distinte: *Test funzionali* e *Miglioramento e ottimizzazione del sistema*.
+- La voce preventiva *Documentazione tecnica e revisione finale* rimane invariata nel consuntivo.
+#v(1em)
+
 Il monte ore complessivo di 304 ore previsto per lo stage è stato rigorosamente rispettato; tuttavia, la distribuzione effettiva dell'impegno ha subito variazioni fisiologiche rispetto a quanto preventivato nel Piano di Lavoro iniziale. 
 
 Come si evince dal confronto tra la @fig:tabella-ore-preventivate e la @fig:tabella-calcolo-ore, lo scostamento principale ha riguardato le fasi di sviluppo, test e ottimizzazione del sistema, che hanno richiesto un _effort_ congiunto superiore a quanto inizialmente stimato (212 ore effettive contro le 190 preventivate). Questa dilatazione dei tempi è direttamente imputabile alle sfide architetturali e inferenziali emerse in corso d'opera con il modello a 9 miliardi di parametri. 

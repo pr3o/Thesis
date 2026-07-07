@@ -9,7 +9,7 @@
 #v(1em)
 
 == Architettura di distribuzione: i tre nodi
-La soluzione si distribuisce su tre nodi di rete distinti. È il punto da cui discende ogni altra scelta progettuale, poichè determina firewall, sicurezza e _deployment_.
+La soluzione si distribuisce su tre nodi di rete distinti. È il punto da cui discende ogni altra scelta progettuale, poiché determina firewall, sicurezza e _deployment_.
 #v(1em)
 - *Nodo A - Workstation operatore.* Ospita l'interfaccia nativa di Agilis e l'intera catena MCP locale: il client e il server MCP sono processi figli, avviati _on-demand_ all'apertura del pannello chatbot. Tutto il carico di orchestrazione locale è confinato qui.
 - *Nodo B - Server AI aziendale.* È il servizio centralizzato e remoto che esegue il modello di linguaggio, raggiunto via HTTP. Nessun modello gira sulla workstation: il carico inferenziale è confinato sul server, così da non gravare sulle postazioni degli operatori.
@@ -56,7 +56,7 @@ I dati di autorizzazione nascono nella sessione Agilis dell'operatore già auten
 La scadenza del JWT durante una conversazione - la sessione usa token a tempo - è gestita con una difesa stratificata, articolata su più livelli: un margine di scadenza che rinnova il token poco prima della sua effettiva invalidazione senza attendere l'errore 401; una rilettura del provider che, su 401, ritenta con il token più recente già disponibile; un _refresh_ reattivo che, riconosciuto un apposito segnale di token scaduto, ne richiede uno nuovo ad Agilis e ritenta l'operazione; un _refresh_ proattivo che aggiorna il token tra un turno e l'altro; e un unico punto di verità che custodisce il _bearer_ corrente. La meccanica di dettaglio di questi livelli è descritta nel capitolo di implementazione.
 
 == Pattern Architetturali adottati <sez:pattern-architetturali>
-I pattern architetturali non sono fini a sé stessi @refactoring-guru: ciascuno risolve un problema specifico imposto dai vincoli o dai requisiti non funzionali.
+I pattern architetturali non sono fini a sé stessi @gamma-helm-johnson-vlissides-1994: ciascuno risolve un problema specifico imposto dai vincoli o dai requisiti non funzionali.
 
 - *#gl("adapter").* Il `ChatbotPanelViewModel` non dipende mai direttamente dalle classi concrete del modulo `XSPMPRIS`, ma solo da interfacce: `IPlanningContextProvider` per la lettura del contesto dallo _scheduler_, `IChangesetApplier` per l'applicazione e il _rollback_ dell'anteprima, `IAttachmentExtractionService` per l'estrazione del testo dagli allegati, `IChatbotOrchestratorClient` per la comunicazione col client MCP. Questo disaccoppiamento isola il pannello dai dettagli interni del gestionale e rende i componenti sostituibili e testabili indipendentemente.
 - *#gl("decorator").* Il `DeferredOrchestrator` (il cui codice è in #link(<cap:B-appendice>)[Appendice B]) implementa `IChatbotOrchestratorClient` e avvolge l'orchestratore reale: all'apertura del pannello avvia la costruzione dell'orchestratore in un _task_ di _background_, restituendo immediatamente il controllo al _thread_ di interfaccia. Quando arriva il primo messaggio, il `DeferredOrchestrator` attende (`await`) il completamento della _factory_ e inoltra la richiesta all'orchestratore ormai pronto, senza aver mai bloccato la UI.
@@ -75,7 +75,7 @@ Durante la fase di sviluppo, l'adozione di questa architettura ha richiesto una 
 Tuttavia, l'esecuzione del modello a 27B introduce requisiti hardware e latenze di risposta attualmente incompatibili con l'infrastruttura di test e con i target di reattività del sistema.
 
 Si è pertanto deciso di mantenere la variante 9B come base per lo sviluppo e l'implementazione del prototipo.
-Poichè il modello 9B, durante elaborazioni prolungate, tende fisiologicamente a sviluppare catene logiche che si autoalimentano sfociando in allucinazioni, si è reso necessario un profondo intervento architetturale sul software circostante per mitigarne i limiti.
+Poiché il modello 9B, durante elaborazioni prolungate, tende fisiologicamente a sviluppare catene logiche che si autoalimentano sfociando in allucinazioni, si è reso necessario un profondo intervento architetturale sul software circostante per mitigarne i limiti.
 
 === Mitigazione delle allucinazioni tramite delega deterministica <sez:strategia-anti-allucinazione>
 La criticità inferenziale del modello 9B è stata affrontata applicando un principio di progettazione rigoroso: la riduzione sistematica del carico operazionale demandato al modello.

@@ -103,13 +103,17 @@ openai:
   date: 2025
   url: https://openai.com/
 
-refactoring-guru:
-  type: reference
-  title: "Refactoring.Guru — Design Patterns"
+gamma-helm-johnson-vlissides-1994:
+  type: book
+  title: "Design Patterns: Elements of Reusable Object-Oriented Software"
   author:
-    - Shvets, Alexander
-  date: 2025
-  url: https://refactoring.guru/
+    - Gamma, Erich
+    - Helm, Richard
+    - Johnson, Ralph
+    - Vlissides, John
+  publisher: "Addison-Wesley"
+  date: 1994
+  isbn: "0-201-63361-2"
 
 jsonrpc-spec:
   type: reference

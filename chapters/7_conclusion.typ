@@ -125,6 +125,20 @@ Complessivamente, il sistema copre *34 requisiti su 41* individuati in fase di a
   ),
   caption: "Riepilogo dei requisiti soddisfatti."
 )<tab:requisiti-soddisfatti>
+
+== Prodotto sviluppato
+In @fig:sequenza-pianificazione e in @fig:chatbot-integrato si può osservare l'interfaccia grafica sviluppata, la sua integrazione nella sezione dedicata alla gestione delle attività aziendali ed un esempio di richiesta di pianificazione in tutte le sue fasi.
+
+#figure(
+    caption: [Interazione utente-chatbot durante l'invio di una richiesta di pianificazione.],
+    image("../images/sequenza-pianificazione.png", width: 100%)
+)<fig:sequenza-pianificazione>
+
+#figure(
+    caption: [Interfaccia integrata: chatbot a destra e calendario attività ed appuntamenti a sinistra.],
+    image("../images/chatbot-integrato.png", width: 100%)
+)<fig:chatbot-integrato>
+
 == Rischi occorsi e mitigati
 I rischi emersi durante lo stage sono riportati in @fig:rischi-occorsi.\
 #v(1em)

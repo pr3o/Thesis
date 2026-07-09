@@ -6,7 +6,7 @@
 #let myCompany = "Omega S.r.l."
 #let myLocation = "Salzano"
 #let myAY = "2025-2026"
-#let myTime = "7 Luglio 2026"
+#let myTime = "8 Luglio 2026"
 #let myTutor = "Marco Ortali"
 #let myUni = "Università degli studi di Padova"
 #let myDepartment = "Dipartimento di Matematica ''Tullio Levi-Civita''"

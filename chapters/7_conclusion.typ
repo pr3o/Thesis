@@ -81,7 +81,7 @@ La @fig:tabella-obiettivi riassume lo stato di completamento per ciascun obietti
     [O03], [Implementare la comunicazione con il sistema LLM], [Soddisfatto],
     [O04], [Realizzare funzionalità di accesso ai dati del gestionale], [Soddisfatto],
     [O05], [Documentare il sistema sviluppato], [Soddisfatto],
-    [O06], [Implementare logiche di analisi dei dati e suggerimento di azioni], [SSoddisfattoì],
+    [O06], [Implementare logiche di analisi dei dati e suggerimento di azioni], [Soddisfatto],
     [O07], [Strutturare il codice secondo buone pratiche di sviluppo], [Soddisfatto],
     [F01], [Estendere il sistema a nuovi casi d'uso applicativi], [Soddisfatto parzialmente]
   )
